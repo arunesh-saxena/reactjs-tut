@@ -39,7 +39,7 @@ export default class Users extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         let userList = this.state.userList;
-        if(this.refs.name.value.length<1 || this.refs.job.value.length < 0){
+        if(this.refs.name.value.length < 1 || this.refs.job.value.length < 0){
             alert('Name and job required');
             return;
         }
@@ -74,7 +74,7 @@ export default class Users extends React.Component {
         return (
             <div>
                 <div className='row'>
-                    <div className='col-md-12'>
+                    <div className='col-md-12 margin-b'>
                         <form onSubmit={this.handleSubmit.bind(this)} className='form-inline'>
                             <div className='form-group'>
                                 <label htmlFor='name' >Name</label>
@@ -86,12 +86,13 @@ export default class Users extends React.Component {
                             </div>
                             <input type="submit" className="btn btn-primary" value="Submit" />
                         </form>
+                        <hr/>
                     </div>
 
                 </div>
 
 
-                <div className='row'>
+                <div className='row margin-b'>
 
                     <h3 className='col-md-12'>The Users List</h3>
                     <div className='col-md-4'>
@@ -102,11 +103,11 @@ export default class Users extends React.Component {
                 </div>
 
                 <div className='row'>
-                    <div className='col-md-6'>
+                    <div className='col-md-6 margin-b'>
                         <ul className="list-group">
                             {userLi.map((user) => {
                                 return (
-                                    <li className="list-group-item" key={user.id} onDoubleClick={this.handleDoubleClick}>
+                                    <li className="list-group-item a" key={user.id} onDoubleClick={this.handleDoubleClick}>
                                         <Link to={`${user.id}`}>{user.name}</Link>
 
                                     </li>
@@ -116,7 +117,7 @@ export default class Users extends React.Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-12 margin-b">
                         <Link to='/also/will/not/match'>Url No match</Link>
 
                             <div className="offset-md-2 col-md-10">

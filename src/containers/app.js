@@ -5,20 +5,14 @@ import {connect} from 'react-redux';
 
 import {
   BrowserRouter,
-  HashRouter,
   Route,
   Switch,
-  Redirect,
-  withRouter
 } from "react-router-dom";
 
 import DemoContainer from './DemoContainer';
 import NoMatch from '../components/NoMatch';
-import BharatPropContainer from './bharat/BharatProp-container';
-import Users from '../components/Users';
-import Child from '../components/child';
 
-import {setName} from '../actions/userActions';
+import {setNameUserAction} from '../actions/userActions';
 
 class App extends React.Component {
   constructor() {
@@ -34,19 +28,12 @@ class App extends React.Component {
         {/*<Switch>*/}
         <div>
           <Switch>
-            <Route  path="/bharatProp/" component={BharatPropContainer}/>
             <Route
               path="/"
               render={(path) => {
-              console.log(path);
-              var path = path;
               return (
                 <div>
-                  {/* <Route  path="/" component={DemoContainer}/> */}
-                  <code>${path.location.pathname !== '/bharatProp/'
-                      ? 'hello'
-                      : 'bhart'}</code>
-                      <DemoContainer/>
+                  <DemoContainer/>
                 </div>
               )
             }}/>
@@ -67,7 +54,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setName: (name) => {
-      dispatch(setName(name))
+      dispatch(setNameUserAction(name))
     }
   };
 };

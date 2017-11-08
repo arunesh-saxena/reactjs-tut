@@ -1,11 +1,8 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import { showSuccessToast, showErrorToast, hideToast } from '../actions/toastActions';
+import { withRouter } from 'react-router-dom';
+import {  hideToast, showErrorToast, showSuccessToast } from '../actions/toastActions';
 
-
-import Toasts from '../components/Toasts';
-
-
+import ToastEx from '../components/ToastEx';
 
 const mapStateToProps = (state) => {
   return (
@@ -16,15 +13,17 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  
   return {
-    hideToast: (toast) => dispatch(hideToast(toast))
+      hideToast: (toast) => dispatch(hideToast(toast)),
+      showSuccess: (data) => {
+          dispatch(showSuccessToast(data))
+      },
+      showError: (data) => {
+          dispatch(showErrorToast(data))
+      }
   }
 };
 
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Toasts);
+const ToastContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ToastEx));
+export default ToastContainer;
 

@@ -4,11 +4,10 @@ import logger from "redux-logger";
 import thunk from 'redux-thunk';
 
 import math from './reducers/mathReducer';
-import user from './reducers/userReducer';
-import toast from './reducers/toastReducer';
-
+import userReducer from './reducers/userReducer';
+import toastReducers from './reducers/toastReducer';
 const store = createStore(
-    combineReducers({ math, user, toast }),
+    combineReducers({ math:math, user:userReducer, toast:toastReducers }),
     {},
     applyMiddleware( logger, thunk)
 );

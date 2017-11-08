@@ -4,9 +4,9 @@ const HIDE_TOAST = 'HIDE_TOAST';
 
 const DEFAULT_STATE = {
   toasts: []
-}
+};
 
-const uiReducers = (state = DEFAULT_STATE, action: ActionType): UiState => {
+const toastReducers = (state = DEFAULT_STATE, action: ActionType) => {
   switch (action.type) {
     case HIDE_TOAST:
       return {
@@ -21,6 +21,8 @@ const uiReducers = (state = DEFAULT_STATE, action: ActionType): UiState => {
     default:
       return state;
   }
+  
+
 };
 
-export default uiReducers;
+export default toastReducers;

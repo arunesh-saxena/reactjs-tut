@@ -1,5 +1,5 @@
 import React from 'react';
-import $ from 'jquery';
+// import $ from 'jquery';
 // import uuid from 'uuid';
 // import PropTypes from 'prop-types';
 
@@ -31,9 +31,11 @@ const Home = (props) => {
                     < /li>
                 )
         })`;
+        console.log(props)
     return (
         <div className="">
             <strong>Home Component</strong>
+            <p></p>
             <AppBtn onClick={props.changeText}
                 custWidth='200px'
                 custClass="btn-primary">Get todo list</AppBtn>

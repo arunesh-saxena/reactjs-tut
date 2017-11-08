@@ -3,13 +3,11 @@ import {connect} from 'react-redux';
 
 import {
   BrowserRouter,
-  HashRouter,
   Route,
   Switch,
   Redirect,
-  withRouter
 } from "react-router-dom";
-
+import './demoContaier.css';
 import Header from '../components/Header';
 import Footer from './Footer';
 import Users from '../components/Users';
@@ -20,13 +18,12 @@ import Login from '../components/Login';
 import Form from '../components/Form';
 import Home from '../components/Home';
 import Text from '../components/Text';
-import HomeContainer from './home-container';
+// import HomeContainer from './home-container';
+import ToastContainer from './toasts-container';
 
-import BharatPropContainer from './bharat/BharatProp-container';
 
-import {setName} from '../actions/userActions';
+import {setNameUserAction} from '../actions/userActions';
 import * as React from 'react';
-import {NavLink} from "react-router-dom";
 
 const PrivateRoute = ({
   component: Component,
@@ -57,7 +54,7 @@ class DemoContainer extends React.Component {
   changeText = () => {
     this
       .props
-      .setName('hello');
+      .setNamefromProp('hello');
   }
 
   onEnableLogin = () => {
@@ -75,7 +72,7 @@ class DemoContainer extends React.Component {
           <div className="row">
             <Header/>
           </div>
-          <div className="hello">
+          <main className="">
             <div className="row">
               <div className="col-md-12">
                 <Switch>
@@ -83,7 +80,7 @@ class DemoContainer extends React.Component {
                     exact
                     path="/"
                     render={() => <div>
-                    <Home
+                    <Home dempTxt = 'this is demo'
                       changeText={this
                       .changeText
                       .bind(this)}/>
@@ -112,16 +109,16 @@ class DemoContainer extends React.Component {
                     component={Form}
                     disableLogin={this.onDisableLogin}
                     isProtectedEnable={this.state.isProtectedEnable}/>
-                  <Route path="/toastex/" component={HomeContainer}/>
+                  <Route path="/toastex/" component={ToastContainer}/>
                   {/* <Route path="/bharatProp/" component={BharatPropContainer}/> */}
                   <Route exact component={NoMatch}/>
                 </Switch>
               </div>
             </div>
 
-          </div>
+          </main>
 
-          <Footer/>
+          <Footer userDemo=' userdemo footer'/>
         </div>
         {/*</Switch>*/}
         {/*</HashRouter>*/}
@@ -136,8 +133,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    setName: (name) => {
-      dispatch(setName(name))
+    setNamefromProp: (name) => {
+      dispatch(setNameUserAction(name))
     }
   };
 };

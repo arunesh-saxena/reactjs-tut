@@ -1,6 +1,5 @@
-
 const userReducer = (state = {
-    name: 'max',
+    name: '------state from userReducer----',
     age: 27
 }, action) => {
     switch (action.type) {
@@ -16,7 +15,10 @@ const userReducer = (state = {
                 age: action.payload
             }
             break;
+        default:
+            return state;
     }
+
     return state;
 }
 

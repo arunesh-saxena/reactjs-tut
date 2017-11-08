@@ -1,4 +1,3 @@
-
 const mathReducer = (state = {
     result: 1,
     lastValue: []
@@ -8,16 +7,24 @@ const mathReducer = (state = {
             state = {
                 ...state,
                 result: state.result + action.payload,
-                lastValue: [...state.lastValue, action.payload]
+                lastValue: [
+                    ...state.lastValue,
+                    action.payload
+                ]
             }
             break;
         case "SUBTRACT":
             state = {
                 ...state,
                 result: state.result - action.payload,
-                lastValue: [...state.lastValue, action.payload]
+                lastValue: [
+                    ...state.lastValue,
+                    action.payload
+                ]
             }
             break;
+        default:
+            return state;
     }
     return state;
 };

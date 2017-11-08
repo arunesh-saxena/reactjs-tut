@@ -1,4 +1,4 @@
-export function setName(name){
+export function setNameUserAction(name){
     return {
         type:'SET_NAME',
         payload: `${name} appending in action`
