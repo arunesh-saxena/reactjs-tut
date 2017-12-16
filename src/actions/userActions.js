@@ -1,11 +1,3 @@
-const setUserLoggedOut = () => {
-    return true;
-
-};
-
-const isUserLoggedIn = () => {
-    return localStorage.hasOwnProperty('userData');
-};
 export function setNameUserAction(name) {
     return {type: 'SET_NAME', payload: `${name} appending in action`}
 }
