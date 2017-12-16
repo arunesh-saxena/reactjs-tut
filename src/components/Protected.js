@@ -3,8 +3,8 @@ import AppBtn from './AppElement';
 class Protected extends React.Component {
     
     disableLogin() {
-        console.log('disableLogin');
-        this.props.disableLogin();
+        console.log('disableLogin',this.props);
+        // this.props.disableLogin();
     }
     render() {
         return (

@@ -4,7 +4,9 @@ import {connect} from 'react-redux';
 import Login from '../components/Login';
 import Register from '../components/Register';
 import { CONSTANTS } from '../constants';
+import { userService } from '../services/userService';
 
+import {login} from '../actions/userActions';
 class LoginContainer extends React.Component {
     constructor(props) {
         super();
@@ -34,19 +36,10 @@ class LoginContainer extends React.Component {
         this.setState({ activeTab: term });
     }
     onLoginClick = (data) =>{
-        console.log('on login',data,this.state);
+        console.log('on logining',data,this.state);
         const bodyString = JSON.stringify(data);
-        fetch(CONSTANTS.api.login,{
-            method:'POST',
-            headers:{
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: bodyString
-        })
-        .then((res)=>res.json())
+        userService.loginUser(bodyString)
         .then(res => {
-            console.log(res)
             if (res.success) {
                 this.setState({
                     serverInfo:{
@@ -54,6 +47,12 @@ class LoginContainer extends React.Component {
                         success: true
                     }
                 });
+                this.props.login({
+                    username: res.data.username,
+                    email: res.data.email,
+                    id: res.data._id
+                });
+                this.props.history.push('/home');
             }else {
               this.setState({
                   serverInfo:{
@@ -63,9 +62,6 @@ class LoginContainer extends React.Component {
               });
             }
           })
-          .catch(error => {
-            console.error(error);
-          });
         }
     hrStyle = {
         'backgroundImage': '-webkit-linear-gradient(left,rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0))'
@@ -110,15 +106,13 @@ class LoginContainer extends React.Component {
     }
 };
 
-// export default DemoContainer;
-const mapStateToProps = (state) => {
-    return  {
-        info : 'this on from map state to props'
-    };
-  };
-  const mapDispatchToProps = (dispatch) => {
-    return {
-     
-    };
-  };
+const mapStateToProps = (state) => ({
+        info : 'this on from map state to props',
+        user: state.user
+  });
+  const mapDispatchToProps = (dispatch) => ({
+    login: (data) => {
+        dispatch(login(data))
+      }
+  });
   export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

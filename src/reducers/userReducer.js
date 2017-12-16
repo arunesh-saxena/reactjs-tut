@@ -1,7 +1,14 @@
-const userReducer = (state = {
-    name: '------state from userReducer----',
-    age: 27
-}, action) => {
+const initialState = {
+	name: '------state from userReducer----',
+    age: 27,
+    user:{
+        username: null,
+        email: null,
+        id: null
+    },
+    isLoggedIn:false,
+};
+const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case "SET_NAME":
             state = {
@@ -13,6 +20,28 @@ const userReducer = (state = {
             state = {
                 ...state,
                 age: action.payload
+            }
+            break;
+        case "LOGIN":
+            state = {
+                ...state,
+                user: {
+                    username: action.data.username,
+                    email: action.data.email,
+                    id: action.data.id,
+                },
+                isLoggedIn: true
+            }
+            break;
+        case "LOGOUT":
+            state = {
+                ...state,
+                user: {
+                    username: null,
+                    email: null,
+                    id: null
+                },
+                isLoggedIn: false
             }
             break;
         default:

@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 
-export const NavMenu = () => {
+export const NavMenu = (props) => {
     return (
         <div>
             <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
@@ -33,6 +33,15 @@ export const NavMenu = () => {
                         <li className="nav-item">
                             <NavLink className="nav-link" activeClassName='active' to={"/toastex/"}>Toast Ex</NavLink>
                         </li>
+
+                        {props.isLoggedIn
+                            ? <li className="nav-item">
+                                    <NavLink className="nav-link" activeClassName='active' to={"/logout/"}>LogOut</NavLink>
+                                </li>
+                            : <li className="nav-item">
+                                <NavLink className="nav-link" activeClassName='active' to={"/login/"}>Login</NavLink>
+                            </li>}
+
                         {/* <li className="nav-item">
                             <NavLink className="nav-link" activeClassName='active' to={"/bharatProp/"}>Bharat Prop</NavLink>
                         </li> */}

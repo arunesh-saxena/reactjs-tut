@@ -1,6 +1,5 @@
 
 import './demoContainer.css';
-// import React from 'react';
 import {connect} from 'react-redux';
 
 import {
@@ -16,10 +15,11 @@ import Child from '../components/child';
 import NoMatch from '../components/NoMatch';
 import Protected from '../components/Protected';
 import LoginContainer from './LoginContainer';
+import Logout from './Logout';
 import Form from '../components/Form';
 import Home from '../components/Home';
 import Text from '../components/Text';
-// import HomeContainer from './home-container';
+import {userService} from '../services/userService';
 import ToastContainer from './toasts-container';
 
 
@@ -32,7 +32,7 @@ const PrivateRoute = ({
 }) => (
   <Route
     {...rest}
-    render={props => (rest['isProtectedEnable']
+    render={props => (rest['isLoggedIn']
     ? (<Component {...props} {...rest}/>)
     : (<Redirect
       to={{
@@ -48,7 +48,7 @@ class DemoContainer extends React.Component {
     super();
     console.log('DemoContainer startes');
     this.state = {
-      isProtectedEnable: false
+      isLoggedIn: userService.isUserLoggedIn()
     }
 
   }
@@ -56,16 +56,8 @@ class DemoContainer extends React.Component {
     this
       .props
       .setNamefromProp('hello');
-  }
-  requireAuth(nextState, replace) {
-    console.log('on enter route checking....');
-  }
-  onEnableLogin = () => {
-    this.setState({isProtectedEnable: true})
-  }
-  onDisableLogin = () => {
-    this.setState({isProtectedEnable: false})
-  }
+  }  
+ 
   render() {
     return (
       <BrowserRouter>
@@ -73,7 +65,7 @@ class DemoContainer extends React.Component {
         {/*<Switch>*/}
         <div className="container">
           <div className="row">
-            <Header/>
+            <Header isLoggedIn={this.props.user.isLoggedIn}/>
           </div>
           <main className="">
             <div className="row">
@@ -83,7 +75,7 @@ class DemoContainer extends React.Component {
                     exact
                     path="/"
                     render={() => <div>
-                    <Home dempTxt = 'this is demo'
+                    <Home
                       changeText={this
                       .changeText
                       .bind(this)}/>
@@ -98,17 +90,19 @@ class DemoContainer extends React.Component {
                   <PrivateRoute
                     path="/protected"
                     component={Protected}
-                    disableLogin={this.onDisableLogin}
-                    isProtectedEnable={this.state.isProtectedEnable}/>
+                    check={this.props.user}
+                    isLoggedIn={this.props.user.isLoggedIn}/>
                   <Route
                     path='/login/'
                     component = { LoginContainer }                   
-                    enableLogin={this.onEnableLogin}
-                    isProtectedEnable={this.state.isProtectedEnable}/>
+                    isLoggedIn={this.state.isLoggedIn}/>
+                    <Route
+                      path='/logout/'
+                      component = { Logout }/>
                   <Route
                     path="/form/"
                     component={Form}/>
-                  <Route path="/toastex/" component={ToastContainer} onEnter={ this.requireAuth}/>
+                  <Route path="/toastex/" component={ToastContainer}/>
                   {/* <Route path="/bharatProp/" component={BharatPropContainer}/> */}
                   <Route exact component={NoMatch}/>
                 </Switch>

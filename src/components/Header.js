@@ -6,7 +6,7 @@ import { NavMenu } from './NavMenu'
 const Header = (props) => {
     return (
         <div className='col-md-12'>
-            <NavMenu />
+            <NavMenu isLoggedIn={props.isLoggedIn}/>
         </div>
     );
 };
