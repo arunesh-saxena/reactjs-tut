@@ -1,3 +1,5 @@
+
+import './demoContainer.css';
 // import React from 'react';
 import {connect} from 'react-redux';
 
@@ -7,14 +9,13 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import './demoContaier.css';
 import Header from '../components/Header';
 import Footer from './Footer';
 import Users from '../components/Users';
 import Child from '../components/child';
 import NoMatch from '../components/NoMatch';
 import Protected from '../components/Protected';
-import Login from '../components/Login';
+import LoginContainer from './LoginContainer';
 import Form from '../components/Form';
 import Home from '../components/Home';
 import Text from '../components/Text';
@@ -56,7 +57,9 @@ class DemoContainer extends React.Component {
       .props
       .setNamefromProp('hello');
   }
-
+  requireAuth(nextState, replace) {
+    console.log('on enter route checking....');
+  }
   onEnableLogin = () => {
     this.setState({isProtectedEnable: true})
   }
@@ -99,17 +102,13 @@ class DemoContainer extends React.Component {
                     isProtectedEnable={this.state.isProtectedEnable}/>
                   <Route
                     path='/login/'
-                    render={() => <div>
-                    <Login
-                      enableLogin={this.onEnableLogin}
-                      isProtectedEnable={this.state.isProtectedEnable}/>
-                  </div>}/>
-                  <PrivateRoute
-                    path="/form/"
-                    component={Form}
-                    disableLogin={this.onDisableLogin}
+                    component = { LoginContainer }                   
+                    enableLogin={this.onEnableLogin}
                     isProtectedEnable={this.state.isProtectedEnable}/>
-                  <Route path="/toastex/" component={ToastContainer}/>
+                  <Route
+                    path="/form/"
+                    component={Form}/>
+                  <Route path="/toastex/" component={ToastContainer} onEnter={ this.requireAuth}/>
                   {/* <Route path="/bharatProp/" component={BharatPropContainer}/> */}
                   <Route exact component={NoMatch}/>
                 </Switch>
