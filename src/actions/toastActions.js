@@ -36,7 +36,7 @@ export const hideToast = (toast) => ({
 
 const defaultSetting = { msg: 'Default msg', autoHide: true };
 export const showSuccessToast = (data) => (dispatch, getState) => {
-  _.clone(data,defaultSetting);
+  _.clone(data, defaultSetting);
   const toastAction = showToast(data.msg, 'success alert alert-success');
   dispatch(toastAction);
   if (data.autoHide === undefined || data.autoHide) {

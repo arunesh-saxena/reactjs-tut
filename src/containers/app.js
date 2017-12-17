@@ -11,15 +11,28 @@ import {
 
 import DemoContainer from './DemoContainer';
 import NoMatch from '../components/NoMatch';
-
-import {setNameUserAction} from '../actions/userActions';
+import {userService} from '../services/userService';
+import {setUserStatus} from '../actions/userActions';
 
 class App extends React.Component {
   constructor() {
     super();
     console.log('app startes');
   }
-
+  componentWillMount() {
+    console.log(this.props.user.isLoggedIn);
+    this.checkUserStatus();
+    setTimeout(()=>{
+      console.log(this.props.user);
+    })
+   
+}
+checkUserStatus (){
+  this.props.setUserStatus({
+    status: userService.isUserLoggedIn(),
+    userData: userService.getLoggedinUser()
+  });    
+}
   render() {
     return (
 
@@ -53,8 +66,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    setName: (name) => {
-      dispatch(setNameUserAction(name))
+    setUserStatus: (status) => {
+      dispatch(setUserStatus(status))
     }
   };
 };

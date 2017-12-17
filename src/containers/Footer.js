@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setNameUserAction } from '../actions/userActions';
 
 import Text from '../components/Text';
 
@@ -26,9 +25,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        setName: (name) => {
-            dispatch(setNameUserAction(name))
-        }
+        
     };
 };
 

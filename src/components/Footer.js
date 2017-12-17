@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setName } from '../actions/userActions';
 
 import Text from './Text';
 
@@ -24,9 +23,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        setName: (name) => {
-            dispatch(setName(name))
-        }
+       
     };
 };
 

@@ -55,8 +55,16 @@ const setUserStorage = (user) =>{
 const isUserLoggedIn = () => {
 	return localStorage.hasOwnProperty('userData');
 };
+const getLoggedinUser = () => {
+	if(isUserLoggedIn()){
+		return JSON.parse(localStorage.userData);
+	}else{
+		return null;
+	}
+}
 export const userService = {
 				loginUser: loginUser,
 				logoutUser: logoutUser,
-				isUserLoggedIn: isUserLoggedIn
+				isUserLoggedIn: isUserLoggedIn,
+				getLoggedinUser : getLoggedinUser
 }

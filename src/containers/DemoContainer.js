@@ -22,8 +22,6 @@ import Text from '../components/Text';
 import {userService} from '../services/userService';
 import ToastContainer from './toasts-container';
 
-
-import {setNameUserAction} from '../actions/userActions';
 import * as React from 'react';
 
 const PrivateRoute = ({
@@ -44,13 +42,17 @@ const PrivateRoute = ({
 )
 
 class DemoContainer extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     console.log('DemoContainer startes');
     this.state = {
-      isLoggedIn: userService.isUserLoggedIn()
+      isLoggedIn: props.user.isLoggedIn
     }
 
+  }
+  componentWillMount() {}
+  componentWillUpdate(){
+    console.log(this.state);
   }
   changeText = () => {
     this
@@ -83,19 +85,17 @@ class DemoContainer extends React.Component {
                     <Text text={this.props.user.name}/>
                   </div>}/>
                   <Route path="/users/" component={Users}/>
-                  <Route path="/users/:id" component={Child}/>
+                  {/* <Route path="/users/:id" component={Child}/> */}
                   <Route
                     path="/home"
                     render={() => <div className="col-md-1 col-md-offset-6"><Home/></div>}/>
                   <PrivateRoute
                     path="/protected"
                     component={Protected}
-                    check={this.props.user}
                     isLoggedIn={this.props.user.isLoggedIn}/>
                   <Route
                     path='/login/'
-                    component = { LoginContainer }                   
-                    isLoggedIn={this.state.isLoggedIn}/>
+                    component = { LoginContainer }/>
                     <Route
                       path='/logout/'
                       component = { Logout }/>
@@ -119,17 +119,11 @@ class DemoContainer extends React.Component {
     );
   }
 };
-
-// export default DemoContainer;
+ 
 const mapStateToProps = (state) => {
   return {user: state.user, math: state.math};
 };
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setNamefromProp: (name) => {
-      dispatch(setNameUserAction(name))
-    }
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+    
+});
 export default connect(mapStateToProps, mapDispatchToProps)(DemoContainer);
-// export default App;
