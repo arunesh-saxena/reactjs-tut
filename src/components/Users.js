@@ -121,12 +121,12 @@ export default class Users extends React.Component {
                         <Link to='/also/will/not/match'>Url No match</Link>
 
                             <div className="offset-md-2 col-md-10">
-
-                        <Route exact path={`${this.props.match.url}/:id`} component={Child} />
+                            u can use child component here also
+                        {/* <Route exact path={`${this.props.match.url}/:id`} component={Child} /> */}
                         </div>
-                            <Route exact path={match.url} render={() => (
+                            {/* <Route exact path={match.url} render={() => (
                                 <h3>Please Select user .</h3>
-                            )} />
+                            )} /> */}
                         
                         <button onClick={this.onRedirect.bind(this)}
                             className="btn btn-primary">Redirect to Home</button>

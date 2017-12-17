@@ -84,8 +84,11 @@ class DemoContainer extends React.Component {
                     Home render part:
                     <Text text={this.props.user.name}/>
                   </div>}/>
-                  <Route path="/users/" component={Users}/>
-                  {/* <Route path="/users/:id" component={Child}/> */}
+                  <Route path="/users/" render={()=>
+                  <div>user page nested router 
+                    <Route path="/users/" component={Users}/>
+                    <Route path="/users/:id" component={Child}/>
+                  </div>} />
                   <Route
                     path="/home"
                     render={() => <div className="col-md-1 col-md-offset-6"><Home/></div>}/>
