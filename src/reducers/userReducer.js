@@ -31,15 +31,15 @@ const userReducer = (state = initialState, action) => {
             }
             break;
         case "SET_USER_STATUS":
-        state = {
-            ...state,
-            user: {
-                username: action.data.username,
-                email: action.data.email,
-                id: action.data.id,
-            },
-            isLoggedIn: action.data.status
-        }
+            state = {
+                ...state,
+                user: {
+                    username: action.data.username,
+                    email: action.data.email,
+                    id: action.data.id,
+                },
+                isLoggedIn: action.data.status
+            }
             break;
         default:
             return state;
