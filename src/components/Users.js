@@ -1,7 +1,6 @@
 import React from 'react';
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import uuid from 'uuid';
-import Child from './child';
 
 export default class Users extends React.Component {
     constructor(props) {
@@ -62,7 +61,6 @@ export default class Users extends React.Component {
 
     render() {
         // const { match, location, history } = this.props;
-        const { match } = this.props;
 
         let userLi = this.state.userList.filter(
             (user) => {

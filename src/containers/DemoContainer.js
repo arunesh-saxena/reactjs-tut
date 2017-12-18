@@ -19,8 +19,9 @@ import Logout from './Logout';
 import Form from '../components/Form';
 import Home from '../components/Home';
 import Text from '../components/Text';
-import {userService} from '../services/userService';
+// import {userService} from '../services/userService';
 import ToastContainer from './toasts-container';
+import SocketContainer from './SocketContainer';
 
 import * as React from 'react';
 
@@ -106,7 +107,7 @@ class DemoContainer extends React.Component {
                     path="/form/"
                     component={Form}/>
                   <Route path="/toastex/" component={ToastContainer}/>
-                  {/* <Route path="/bharatProp/" component={BharatPropContainer}/> */}
+                  <Route path="/socket/" component={SocketContainer}/>
                   <Route exact component={NoMatch}/>
                 </Switch>
               </div>

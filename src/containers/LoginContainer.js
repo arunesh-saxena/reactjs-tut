@@ -3,7 +3,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Login from '../components/Login';
 import Register from '../components/Register';
-import { CONSTANTS } from '../constants';
 import { userService } from '../services/userService';
 
 import {login} from '../actions/userActions';
@@ -76,10 +75,10 @@ class LoginContainer extends React.Component {
                                 <div className="panel-heading">
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <a className={this.state.activeTab == this.CONST.LOGIN ? 'active':''} onClick={(e)=>this.toggleTab(e,this.CONST.LOGIN)}>Login</a>
+                                            <a className={this.state.activeTab === this.CONST.LOGIN ? 'active':''} onClick={(e)=>this.toggleTab(e,this.CONST.LOGIN)}>Login</a>
                                         </div>
                                         <div className="col-md-6">
-                                            <a className={this.state.activeTab == this.CONST.REGISTER ? 'active':''} onClick={(e)=>this.toggleTab(e,this.CONST.REGISTER)}>Register</a>
+                                            <a className={this.state.activeTab === this.CONST.REGISTER ? 'active':''} onClick={(e)=>this.toggleTab(e,this.CONST.REGISTER)}>Register</a>
                                         </div>
                                     </div>
                                     <hr style={this.hrStyle}/>

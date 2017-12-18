@@ -15,7 +15,7 @@ export const NavMenu = (props) => {
                     aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <a className="navbar-brand" href="#">Navbar</a>
+                <a className="navbar-brand" href="">Navbar</a>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
@@ -42,9 +42,9 @@ export const NavMenu = (props) => {
                                 <NavLink className="nav-link" activeClassName='active' to={"/login/"}>Login</NavLink>
                             </li>}
 
-                        {/* <li className="nav-item">
-                            <NavLink className="nav-link" activeClassName='active' to={"/bharatProp/"}>Bharat Prop</NavLink>
-                        </li> */}
+                            <li className="nav-item">
+                                <NavLink className="nav-link" activeClassName='active' to={"/socket/"}>Socket</NavLink>
+                            </li>
 
                     </ul>
                 </div>

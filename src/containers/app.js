@@ -22,9 +22,6 @@ class App extends React.Component {
   componentWillMount() {
     console.log(this.props.user.isLoggedIn);
     this.checkUserStatus();
-    setTimeout(()=>{
-      console.log(this.props.user);
-    })
    
 }
 checkUserStatus (){
