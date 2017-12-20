@@ -1,14 +1,15 @@
 import io from 'socket.io-client';
-import { error } from 'util';
-const socket = io('http://localhost:8000', {
-    autoConnect: false
-});
+import {error} from 'util';
+const socket = io('http://localhost:8000', {autoConnect: false});
 
 function subscribeToMsg(cb) {
     socket.open();
     console.log('subscribeToMsg');
-    
-    socket.on('msgFromServer', data => cb(error, data));    
+
+    socket.on('msgFromServer', data => {
+        console.log(data);
+        cb(error, data)
+    });
 }
 
 function unSubscribeToMsg() {

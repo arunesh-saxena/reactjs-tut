@@ -15,8 +15,7 @@ class SocketContainer extends React.Component {
     }
     componentWillMount() {
         console.log(2);
-        subscribeToMsg((err, data) => {
-            console.log(data)
+        subscribeToMsg((err, data) => {            
             this.setState({msg: data.msg})
         });
     }
@@ -29,7 +28,7 @@ class SocketContainer extends React.Component {
 
     onEnter = function (e) {
         if (e.key === 'Enter') {
-            console.log('do validate');
+            console.log('do emit');
             emitMsg({msg: this.state.orderText});
         }
     }
