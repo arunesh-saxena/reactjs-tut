@@ -14,6 +14,9 @@ import NoMatch from '../components/NoMatch';
 import {userService} from '../services/userService';
 import {setUserStatus} from '../actions/userActions';
 
+/* Restro */
+import MenuContainer from './restro/MenuContainer';
+
 class App extends React.Component {
   constructor() {
     super();
@@ -38,15 +41,19 @@ checkUserStatus (){
         {/*<Switch>*/}
         <div>
           <Switch>
-            <Route
-              path="/"
-              render={(path) => {
+            <Route path="/menu/" component ={MenuContainer}/>
+            <Route path="/order/review/" render={() => <div>this is cutomer window page</div>}/>
+            <Route path="/order/status/:id" render={() => <div>this is order status page</div>}/>
+
+            <Route path="/" render={(path) => {
               return (
                 <div>
                   <DemoContainer/>
                 </div>
               )
             }}/>
+            {/*----Restro-----  */}
+            
             <Route exact component={NoMatch}/>
           </Switch>
         </div>

@@ -8,6 +8,8 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
+import * as React from 'react';
+
 import Header from '../components/Header';
 import Footer from './Footer';
 import Users from '../components/Users';
@@ -22,8 +24,6 @@ import Text from '../components/Text';
 // import {userService} from '../services/userService';
 import ToastContainer from './toasts-container';
 import SocketContainer from './SocketContainer';
-
-import * as React from 'react';
 
 const PrivateRoute = ({
   component: Component,
@@ -74,9 +74,7 @@ class DemoContainer extends React.Component {
             <div className="row">
               <div className="col-md-12">
                 <Switch>
-                  <Route
-                    exact
-                    path="/"
+                  <Route exact path="/"
                     render={() => <div>
                     <Home
                       changeText={this
@@ -90,24 +88,18 @@ class DemoContainer extends React.Component {
                     <Route path="/users/" component={Users}/>
                     <Route path="/users/:id" component={Child}/>
                   </div>} />
-                  <Route
-                    path="/home"
+                  <Route path="/home" 
                     render={() => <div className="col-md-1 col-md-offset-6"><Home/></div>}/>
                   <PrivateRoute
                     path="/protected"
                     component={Protected}
                     isLoggedIn={this.props.user.isLoggedIn}/>
-                  <Route
-                    path='/login/'
-                    component = { LoginContainer }/>
-                    <Route
-                      path='/logout/'
-                      component = { Logout }/>
-                  <Route
-                    path="/form/"
-                    component={Form}/>
+                  <Route path='/login/' component = { LoginContainer }/>
+                  <Route path='/logout/' component = { Logout }/>
+                  <Route path="/form/" component={Form}/>
                   <Route path="/toastex/" component={ToastContainer}/>
                   <Route path="/socket/" component={SocketContainer}/>
+                  
                   <Route exact component={NoMatch}/>
                 </Switch>
               </div>

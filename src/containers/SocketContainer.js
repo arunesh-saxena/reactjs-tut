@@ -32,6 +32,9 @@ class SocketContainer extends React.Component {
             emitMsg({msg: this.state.orderText});
         }
     }
+    componentWillUpdate() {
+        console.log('componentWillUpdate() ');
+    }
     render() {
         console.log(3);
         return (
