@@ -4,19 +4,88 @@ import React, {Component} from 'react';
 import './OrderReviewContainer.css';
 
 import {CountBtn} from '../../components/restro/common/countBtn';
+import {CurrencyInr} from '../../components/restro/common/utility';
 
 class OrderReviewContainer extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            orderList: this.orderList
+        }
     }
-    onIncrementClick = () => {
-        console.log('onIncrementClick');
+    onIncrementClick = (item) => {
+        let list = [];
+        item.qnty--;
+        if (item.qnty === 0) {
+            this.orderList = this.state.orderList.filter((v) => {
+                            return v.id !== item.id;
+                        });
+        }
+        this.setState({orderList: this.orderList});
     }
-    onDecrementClick = () => {
-        console.log('onDecrementClick');
+    onDecrementClick = (item) => {
+        item.qnty++;
+        this.setState({orderList: this.orderList});
     }
+    orderList = [
+        {
+            id: 1,
+            name: 'item 1',
+            qnty: 2,
+            price: 17
+        }, {
+            id: 2,
+            name: 'item 2',
+            qnty: 4,
+            price: 73
+        }, {
+            id: 3,
+            name: 'item 3',
+            qnty: 7,
+            price: 21
+        }
+    ];
+
     render() {
+        let subTotal = 0;
+        const items = this
+            .state
+            .orderList
+            .map((item, index) => {
+                subTotal += (item.price * item.qnty);
+                return <li className="list-group-item" key={index}>
+                    <div className='cart-item'>
+                        <div className="details clearfix">
+                            <div className="name">{item.name}</div>
+                        </div>
+                        <span>
+                            <span className="count">
+                                <div className="super_number menu">
+                                    <CountBtn
+                                        val={item.qnty}
+                                        increment={() => this.onIncrementClick(item)}
+                                        decrement={() => this.onDecrementClick(item)}/>
+                                </div>
+                            </span>
+                            <span className="quantity">
+                                <span className="x-icon">×</span>
+                                <CurrencyInr
+                                    item={{
+                                    price: item.price
+                                }}/>
+                            </span>
+                            <span className="price item-price">
+                                <CurrencyInr
+                                    item={{
+                                    price: (item.price * item.qnty)
+                                }}/></span>
+                        </span>
+                        <div className="clear"></div>
+                    </div>
+                </li>
+            });
         return (
+
             <div className='fixed-order'>
                 <div className='row'>
                     <div className='col-md-12'>
@@ -26,238 +95,9 @@ class OrderReviewContainer extends Component {
                 <div className='row'>
                     <div className='col-md-12 cart-list'>
                         <ul className="list-group">
-                            <li className="list-group-item">
-                                <div className='cart-item'>
-                                    <div className="details clearfix">
-                                        <div className="name">Veg Biryani</div>
-                                    </div>
-                                    <span>
-                                        <span className="count">
-                                            <div className="super_number menu">
-                                                <span>
-                                                    <button className="ui left attached button dec">
-                                                        –
-                                                    </button>
-                                                    <input type="text" value="1" readOnly/>
-                                                    <button className="ui right attached button inc">
-                                                        +
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </span>
-                                        <span className="quantity">
-                                            <span className="x-icon">×</span>₹300.00
-                                        </span>
-                                        <span className="price item-price">₹300.00</span>
-                                    </span>
-                                    <div className="clear"></div>
-                                </div>
-                            </li>
-                            <li className="list-group-item">
-                                <div className='cart-item'>
-                                    <div className="details clearfix">
-                                        <div className="name">Veg Biryani</div>
-                                    </div>
-                                    <span>
-                                        <CountBtn val='22' increment={this.onIncrementClick} decrement={this.onDecrementClick}/>
-                                        <span className="quantity">
-                                            <span className="x-icon">×</span>₹300.00
-                                        </span>
-                                        <span className="price item-price">₹300.00</span>
-                                    </span>
-                                    <div className="clear"></div>
-                                </div>
-                            </li>
-                            <li className="list-group-item">
-                                <div className='cart-item'>
-                                    <div className="details clearfix">
-                                        <div className="name">Veg Biryani</div>
-                                    </div>
-                                    <span>
-                                        <span className="count">
-                                            <div className="super_number menu">
-                                                <span>
-                                                    <button className="ui left attached button dec">
-                                                        –
-                                                    </button>
-                                                    <input type="text" value="1" readOnly/>
-                                                    <button className="ui right attached button inc">
-                                                        +
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </span>
-                                        <span className="quantity">
-                                            <span className="x-icon">×</span>₹300.00
-                                        </span>
-                                        <span className="price item-price">₹300.00</span>
-                                    </span>
-                                    <div className="clear"></div>
-                                </div>
-                            </li>
-                            <li className="list-group-item">
-                                <div className='cart-item'>
-                                    <div className="details clearfix">
-                                        <div className="name">Veg Biryani</div>
-                                    </div>
-                                    <span>
-                                        <span className="count">
-                                            <div className="super_number menu">
-                                                <span>
-                                                    <button className="ui left attached button dec">
-                                                        –
-                                                    </button>
-                                                    <input type="text" value="1" readOnly/>
-                                                    <button className="ui right attached button inc">
-                                                        +
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </span>
-                                        <span className="quantity">
-                                            <span className="x-icon">×</span>₹300.00
-                                        </span>
-                                        <span className="price item-price">₹300.00</span>
-                                    </span>
-                                    <div className="clear"></div>
-                                </div>
-                            </li>
-                            <li className="list-group-item">
-                                <div className='cart-item'>
-                                    <div className="details clearfix">
-                                        <div className="name">Veg Biryani</div>
-                                    </div>
-                                    <span>
-                                        <span className="count">
-                                            <div className="super_number menu">
-                                                <span>
-                                                    <button className="ui left attached button dec">
-                                                        –
-                                                    </button>
-                                                    <input type="text" value="1" readOnly/>
-                                                    <button className="ui right attached button inc">
-                                                        +
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </span>
-                                        <span className="quantity">
-                                            <span className="x-icon">×</span>₹300.00
-                                        </span>
-                                        <span className="price item-price">₹300.00</span>
-                                    </span>
-                                    <div className="clear"></div>
-                                </div>
-                            </li>
 
-                            <li className="list-group-item">
-                                <div className='cart-item'>
-                                    <div className="details clearfix">
-                                        <div className="name">Veg Biryani</div>
-                                    </div>
-                                    <span>
-                                        <span className="count">
-                                            <div className="super_number menu">
-                                                <span>
-                                                    <button className="ui left attached button dec">
-                                                        –
-                                                    </button>
-                                                    <input type="text" value="1" readOnly/>
-                                                    <button className="ui right attached button inc">
-                                                        +
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </span>
-                                        <span className="quantity">
-                                            <span className="x-icon">×</span>₹300.00
-                                        </span>
-                                        <span className="price item-price">₹300.00</span>
-                                    </span>
-                                    <div className="clear"></div>
-                                </div>
-                            </li>
-                            <li className="list-group-item">
-                                <div className='cart-item'>
-                                    <div className="details clearfix">
-                                        <div className="name">Veg Biryani</div>
-                                    </div>
-                                    <span>
-                                        <span className="count">
-                                            <div className="super_number menu">
-                                                <span>
-                                                    <button className="ui left attached button dec">
-                                                        –
-                                                    </button>
-                                                    <input type="text" value="1" readOnly/>
-                                                    <button className="ui right attached button inc">
-                                                        +
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </span>
-                                        <span className="quantity">
-                                            <span className="x-icon">×</span>₹300.00
-                                        </span>
-                                        <span className="price item-price">₹300.00</span>
-                                    </span>
-                                    <div className="clear"></div>
-                                </div>
-                            </li>
-                            <li className="list-group-item">
-                                <div className='cart-item'>
-                                    <div className="details clearfix">
-                                        <div className="name">Veg Biryani</div>
-                                    </div>
-                                    <span>
-                                        <span className="count">
-                                            <div className="super_number menu">
-                                                <span>
-                                                    <button className="ui left attached button dec">
-                                                        –
-                                                    </button>
-                                                    <input type="text" value="1" readOnly/>
-                                                    <button className="ui right attached button inc">
-                                                        +
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </span>
-                                        <span className="quantity">
-                                            <span className="x-icon">×</span>₹300.00
-                                        </span>
-                                        <span className="price item-price">₹300.00</span>
-                                    </span>
-                                    <div className="clear"></div>
-                                </div>
-                            </li>
-                            <li className="list-group-item">
-                                <div className='cart-item'>
-                                    <div className="details clearfix">
-                                        <div className="name">Veg Biryani</div>
-                                    </div>
-                                    <span>
-                                        <span className="count">
-                                            <div className="super_number menu">
-                                                <span>
-                                                    <button className="ui left attached button dec">
-                                                        –
-                                                    </button>
-                                                    <input type="text" value="1" readOnly/>
-                                                    <button className="ui right attached button inc">
-                                                        +
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </span>
-                                        <span className="quantity">
-                                            <span className="x-icon">×</span>₹300.00
-                                        </span>
-                                        <span className="price item-price">₹300.00</span>
-                                    </span>
-                                    <div className="clear"></div>
-                                </div>
-                            </li>
+                            {items}
+
                         </ul>
                     </div>
                 </div>
@@ -268,7 +108,11 @@ class OrderReviewContainer extends Component {
                                 <div className="col-md-12">
                                     <div className="totals clear">
                                         <span className="name">Subtotal</span>
-                                        <span className="price">₹9982.00</span>
+                                        <span className="price">
+                                            <CurrencyInr
+                                                item={{
+                                                price: subTotal
+                                            }}/></span>
                                     </div>
                                 </div>
                             </div>

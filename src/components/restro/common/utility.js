@@ -3,7 +3,7 @@ import React from 'react';
 
 export const CurrencyInr = (props) => {
     return (
-        <div>
+        <span>
             <span className="CurrencyInr">
                 <span className='currency_symbol'>&#8377;</span>
                 <span className='price'>
@@ -13,6 +13,6 @@ export const CurrencyInr = (props) => {
                 </span>
             </span>
 
-        </div>
+        </span>
     );
 };

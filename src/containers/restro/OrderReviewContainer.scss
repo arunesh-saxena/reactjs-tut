@@ -16,8 +16,7 @@
 }
 
 .cart-item {
-    width: 100%;
-    
+    width: 100%;    
     .quantity {
         color: #89959B; // line-height: 28px;
         .x-icon {
@@ -26,13 +25,13 @@
         }
     }
     .price {
-        text-align: right;
-        float: right;
-        margin-left: .25em;
+        color: #89959B;
     }
     .item-price {
         // margin-top: 5px;
-        color: #89959B;
+        text-align: right;
+        float: right;
+        margin-left: .25em;
     }
 }
 

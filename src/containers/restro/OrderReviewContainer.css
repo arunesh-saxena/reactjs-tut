@@ -19,11 +19,11 @@
       padding-left: 10px;
       padding-right: 5px; }
   .cart-item .price {
+    color: #89959B; }
+  .cart-item .item-price {
     text-align: right;
     float: right;
     margin-left: .25em; }
-  .cart-item .item-price {
-    color: #89959B; }
 
 .cart-summary-total {
   margin-left: 1px;
