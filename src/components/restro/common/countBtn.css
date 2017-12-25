@@ -1,0 +1,34 @@
+.count-btn .super_number.menu {
+  margin: 5px 0; }
+  .count-btn .super_number.menu .ui.attached.button {
+    padding-right: 6px !important;
+    padding-left: 6px !important;
+    background: #fff !important;
+    color: #099E44 !important;
+    box-shadow: 0 0 0 1px #099E44 !important;
+    float: left;
+    cursor: pointer;
+    line-height: 14px;
+    height: 25px;
+    font-size: 22px;
+    border: none;
+    position: relative;
+    outline: 0; }
+    .count-btn .super_number.menu .ui.attached.button.left {
+      border-radius: 5px 0 0 5px; }
+    .count-btn .super_number.menu .ui.attached.button.right {
+      border-radius: 0 5px 5px 0; }
+  .count-btn .super_number.menu input {
+    position: relative;
+    width: 30px;
+    margin: 0;
+    background: #099E44;
+    color: #fff;
+    font-size: 14px;
+    height: 27px;
+    border: 1px solid #099E44;
+    float: left;
+    top: -1px;
+    padding: 0;
+    text-align: center;
+    border-radius: 0; }

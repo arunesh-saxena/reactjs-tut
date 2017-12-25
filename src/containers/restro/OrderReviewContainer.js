@@ -3,8 +3,18 @@ import React, {Component} from 'react';
 
 import './OrderReviewContainer.css';
 
+import {CountBtn} from '../../components/restro/common/countBtn';
+
 class OrderReviewContainer extends Component {
-    // constructor(props) {     super(props); }
+    constructor(props) {
+        super(props);
+    }
+    onIncrementClick = () => {
+        console.log('onIncrementClick');
+    }
+    onDecrementClick = () => {
+        console.log('onDecrementClick');
+    }
     render() {
         return (
             <div className='fixed-order'>
@@ -49,19 +59,7 @@ class OrderReviewContainer extends Component {
                                         <div className="name">Veg Biryani</div>
                                     </div>
                                     <span>
-                                        <span className="count">
-                                            <div className="super_number menu">
-                                                <span>
-                                                    <button className="ui left attached button dec">
-                                                        –
-                                                    </button>
-                                                    <input type="text" value="1" readOnly/>
-                                                    <button className="ui right attached button inc">
-                                                        +
-                                                    </button>
-                                                </span>
-                                            </div>
-                                        </span>
+                                        <CountBtn val='22' increment={this.onIncrementClick} decrement={this.onDecrementClick}/>
                                         <span className="quantity">
                                             <span className="x-icon">×</span>₹300.00
                                         </span>
@@ -274,12 +272,14 @@ class OrderReviewContainer extends Component {
                                     </div>
                                 </div>
                             </div>
-                            {(this.props.isSubmitBtn ? <div className="row">
-                                <div className="col-md-12">
-                                    <button type="button" className="btn btn-success btn-lg btn-block">Continue</button>
-                                </div>
-                            </div> : '')}
-                            
+                            {(this.props.isSubmitBtn
+                                ? <div className="row">
+                                        <div className="col-md-12">
+                                            <button type="button" className="btn btn-success btn-lg btn-block">Continue</button>
+                                        </div>
+                                    </div>
+                                : '')}
+
                         </div>
                     </div>
                 </div>
