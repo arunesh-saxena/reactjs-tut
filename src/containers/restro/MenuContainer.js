@@ -15,8 +15,8 @@ class MenuContainer extends Component {
     render = () => {
         return (
             <div>
-                    <div className="container">
-                    <Header/>
+                <div className="container">
+                    <Header title='Select Your Order'/>
                     <div className='body-padding-top'>
                         <ItemListContainer/>
                     </div>

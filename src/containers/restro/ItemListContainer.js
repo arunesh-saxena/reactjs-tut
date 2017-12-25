@@ -6,7 +6,6 @@ import './itemListContainer.css';
 import {ItemList} from '../../components/restro/ItemList';
 import OrderReviewContainer from './OrderReviewContainer';
 
-// import ItemListContainer from './ItemListContainer';
 
 class ItemListContainer extends Component {
     // constructor(props) {
@@ -84,13 +83,13 @@ class ItemListContainer extends Component {
     ];
     render() {
         return (
-            <div>
+            <div className='item-list-container'>
                 <div className='row'>
                     <div className='col-md-8'>
                         <ItemList items={this.items}/>
                     </div>
                     <div className='col-md-4'>
-                        <OrderReviewContainer/>
+                        <OrderReviewContainer  isSubmitBtn='true'/>
                     </div>
                 </div>
             </div>

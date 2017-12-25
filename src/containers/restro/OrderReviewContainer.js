@@ -7,7 +7,7 @@ class OrderReviewContainer extends Component {
     // constructor(props) {     super(props); }
     render() {
         return (
-            <div className="fixed">
+            <div className='fixed-order'>
                 <div className='row'>
                     <div className='col-md-12'>
                         <h4>Your Order</h4>
@@ -274,11 +274,12 @@ class OrderReviewContainer extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="row">
+                            {(this.props.isSubmitBtn ? <div className="row">
                                 <div className="col-md-12">
                                     <button type="button" className="btn btn-success btn-lg btn-block">Continue</button>
                                 </div>
-                            </div>
+                            </div> : '')}
+                            
                         </div>
                     </div>
                 </div>
