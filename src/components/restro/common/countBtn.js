@@ -3,18 +3,21 @@ import React from 'react';
 import './countBtn.css';
 
 export const CountBtn = (props) => {
+    const isReadOnly = props.isReadOnly;
     return (
         <div>
             <span className="count-btn">
                 <div className="super_number menu">
                     <span>
-                        <button className="ui left attached button dec" onClick={props.increment}>
+                        {!isReadOnly && <button className="ui left attached button dec" onClick={props.increment}>
                             –
-                        </button>
+                        </button>}
+
                         <input type="text" value={props.val} readOnly/>
-                        <button className="ui right attached button inc" onClick={props.decrement}>
+                        
+                         {!isReadOnly && <button className="ui right attached button inc" onClick={props.decrement}>
                             +
-                        </button>
+                        </button>}
                     </span>
                 </div>
             </span>

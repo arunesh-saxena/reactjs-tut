@@ -13,19 +13,27 @@ class OrderStatusContainer extends React.Component {
                     <div className='body-padding-top'>
                         <div className="row">
                             <div className='col-md-6'>
-                                <OrderReviewContainer/>
+                                <OrderReviewContainer isReadOnly='true'/>
                             </div>
                             <div className='col-md-6'>
-                                <div className="card text-center">
-                                    <div className="card-body">
-                                        <h4 className="card-title">Token # 43</h4>
-                                        <div className='status-outter'>
-                                            <div className="status">
-                                                <span className='text'>Pending
-                                                </span>
+                                <div className='row'>
+                                    <div className='col-md-12'>
+                                        <h4>Order Status</h4>
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <div className='col-md-12'>
+                                        <div className="card text-center">
+                                            <div className="card-body">
+                                                <h4 className="card-title">Token # 43</h4>
+                                                <div className='status-outter'>
+                                                    <div className="status">
+                                                        <span className='text'>Pending
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

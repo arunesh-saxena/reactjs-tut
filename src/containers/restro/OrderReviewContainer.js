@@ -8,24 +8,30 @@ import {CurrencyInr} from '../../components/restro/common/utility';
 
 class OrderReviewContainer extends Component {
     constructor(props) {
-        super(props);
+        super();
         this.state = {
             orderList: this.orderList
         }
     }
     onIncrementClick = (item) => {
-        let list = [];
         item.qnty--;
         if (item.qnty === 0) {
-            this.orderList = this.state.orderList.filter((v) => {
-                            return v.id !== item.id;
-                        });
+            this.orderList = this
+                .state
+                .orderList
+                .filter((v) => {
+                    return v.id !== item.id;
+                });
         }
         this.setState({orderList: this.orderList});
     }
     onDecrementClick = (item) => {
         item.qnty++;
         this.setState({orderList: this.orderList});
+    }
+    OnContinue () {
+        console.log(this.props,this.context);
+        this.props.history.push('/order/status/2');
     }
     orderList = [
         {
@@ -62,6 +68,7 @@ class OrderReviewContainer extends Component {
                             <span className="count">
                                 <div className="super_number menu">
                                     <CountBtn
+                                        isReadOnly={this.props.isReadOnly}
                                         val={item.qnty}
                                         increment={() => this.onIncrementClick(item)}
                                         decrement={() => this.onDecrementClick(item)}/>
@@ -119,7 +126,10 @@ class OrderReviewContainer extends Component {
                             {(this.props.isSubmitBtn
                                 ? <div className="row">
                                         <div className="col-md-12">
-                                            <button type="button" className="btn btn-success btn-lg btn-block">Continue</button>
+                                            <button
+                                                type="button"
+                                                className="btn btn-success btn-lg btn-block"
+                                                onClick={this.OnContinue.bind(this)}>Continue</button>
                                         </div>
                                     </div>
                                 : '')}

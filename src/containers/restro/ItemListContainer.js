@@ -89,7 +89,7 @@ class ItemListContainer extends Component {
                         <ItemList items={this.items}/>
                     </div>
                     <div className='col-md-4'>
-                        <OrderReviewContainer  isSubmitBtn='true'/>
+                        <OrderReviewContainer  isSubmitBtn='true' {...this.props}/>
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@ import ItemListContainer from './ItemListContainer';
 
 class MenuContainer extends Component {
     constructor(props) {
-        super(props);
+        super();
         console.log('menu container')
     }
 
@@ -18,7 +18,7 @@ class MenuContainer extends Component {
                 <div className="container">
                     <Header title='Select Your Order'/>
                     <div className='body-padding-top'>
-                        <ItemListContainer/>
+                        <ItemListContainer {...this.props}/>
                     </div>
                 </div>
             </div>
