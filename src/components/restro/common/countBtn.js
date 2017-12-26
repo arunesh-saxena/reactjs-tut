@@ -9,13 +9,13 @@ export const CountBtn = (props) => {
             <span className="count-btn">
                 <div className="super_number menu">
                     <span>
-                        {!isReadOnly && <button className="ui left attached button dec" onClick={props.increment}>
+                        {!isReadOnly && <button className="ui left attached button dec" onClick={props.decrement}>
                             –
                         </button>}
 
                         <input type="text" value={props.val} readOnly/>
                         
-                         {!isReadOnly && <button className="ui right attached button inc" onClick={props.decrement}>
+                         {!isReadOnly && <button className="ui right attached button inc" onClick={props.increment}>
                             +
                         </button>}
                     </span>

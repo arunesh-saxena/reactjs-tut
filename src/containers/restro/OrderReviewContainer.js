@@ -1,62 +1,57 @@
 import React, {Component} from 'react';
-// import {connect} from 'react-redux';
+import {connect} from 'react-redux';
 
 import './OrderReviewContainer.css';
 
 import {CountBtn} from '../../components/restro/common/countBtn';
 import {CurrencyInr} from '../../components/restro/common/utility';
+import {setMenuList, setOrder} from '../../actions/restroActions';
 
 class OrderReviewContainer extends Component {
     constructor(props) {
         super();
         this.state = {
-            orderList: this.orderList
+            orderList: props.restro.orderList
         }
     }
+    componentWillUpdate(){
+        console.log('componentWillUpdate');
+    }
     onIncrementClick = (item) => {
+        item.qnty++;
+        this.setState({orderList: this.state.orderList});
+        console.log(this.state.orderList,this.props.restro.orderList);
+        // this.props.setOrder(item);
+    }
+    onDecrementClick = (item) => {
         item.qnty--;
+        let orderList = [];
         if (item.qnty === 0) {
-            this.orderList = this
+            orderList = this
                 .state
                 .orderList
                 .filter((v) => {
                     return v.id !== item.id;
                 });
+                // this.props.restro.orderList = this.props.restro.orderList.filter((v) => {
+                //     return v.id !== item.id;
+                // });
+                this.props.setOrder(item);
         }
-        this.setState({orderList: this.orderList});
+        this.setState({orderList: orderList});
+        console.log(this.state.orderList,this.props.restro.orderList);
+        
+        // this.props.setOrder(orderItem);
     }
-    onDecrementClick = (item) => {
-        item.qnty++;
-        this.setState({orderList: this.orderList});
-    }
-    OnContinue () {
+    onContinue () {
         console.log(this.props,this.context);
         this.props.history.push('/order/status/2');
     }
-    orderList = [
-        {
-            id: 1,
-            name: 'item 1',
-            qnty: 2,
-            price: 17
-        }, {
-            id: 2,
-            name: 'item 2',
-            qnty: 4,
-            price: 73
-        }, {
-            id: 3,
-            name: 'item 3',
-            qnty: 7,
-            price: 21
-        }
-    ];
 
     render() {
         let subTotal = 0;
-        const items = this
-            .state
-            .orderList
+        const items = this.props.restro.orderList
+        // const items = this.state.orderList
             .map((item, index) => {
                 subTotal += (item.price * item.qnty);
                 return <li className="list-group-item" key={index}>
@@ -91,8 +86,8 @@ class OrderReviewContainer extends Component {
                     </div>
                 </li>
             });
-        return (
 
+        return (
             <div className='fixed-order'>
                 <div className='row'>
                     <div className='col-md-12'>
@@ -129,7 +124,7 @@ class OrderReviewContainer extends Component {
                                             <button
                                                 type="button"
                                                 className="btn btn-success btn-lg btn-block"
-                                                onClick={this.OnContinue.bind(this)}>Continue</button>
+                                                onClick={this.onContinue.bind(this)}>Continue</button>
                                         </div>
                                     </div>
                                 : '')}
@@ -142,4 +137,13 @@ class OrderReviewContainer extends Component {
     };
 }
 
-export default OrderReviewContainer;
+const mapStateToProps = (state) => ({restro: state.restro});
+const mapDispatchToProps = (dispatch) => ({
+    setMenuList: (data) => {
+        dispatch(setMenuList(data))
+    },
+    setOrder: (data) => {
+        dispatch(setOrder(data));
+    }
+})
+export default connect(mapStateToProps, mapDispatchToProps)(OrderReviewContainer);

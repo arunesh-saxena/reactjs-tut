@@ -9,7 +9,7 @@ export const CurrencyInr = (props) => {
                 <span className='price'>
                     {props.item.price} 
 
-                    {(props.item.unit)? ` / ${props.item.unit}` :''}
+                    {(props.item.unit)? ` ${props.item.unit}` :''}
                 </span>
             </span>
 
