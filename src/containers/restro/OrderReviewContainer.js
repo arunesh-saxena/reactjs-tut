@@ -19,29 +19,16 @@ class OrderReviewContainer extends Component {
     }
     onIncrementClick = (item) => {
         item.qnty++;
-        this.setState({orderList: this.state.orderList});
-        console.log(this.state.orderList,this.props.restro.orderList);
-        // this.props.setOrder(item);
+        this.props.setOrder(item,'ADD');
     }
     onDecrementClick = (item) => {
         item.qnty--;
-        let orderList = [];
         if (item.qnty === 0) {
-            orderList = this
-                .state
-                .orderList
-                .filter((v) => {
-                    return v.id !== item.id;
-                });
-                // this.props.restro.orderList = this.props.restro.orderList.filter((v) => {
-                //     return v.id !== item.id;
-                // });
-                this.props.setOrder(item);
+            this.props.setOrder(item, 'REMOVE');
+        }else{
+            this.props.setOrder(item,'ADD');
         }
-        this.setState({orderList: orderList});
-        console.log(this.state.orderList,this.props.restro.orderList);
         
-        // this.props.setOrder(orderItem);
     }
     onContinue () {
         console.log(this.props,this.context);
@@ -51,7 +38,6 @@ class OrderReviewContainer extends Component {
     render() {
         let subTotal = 0;
         const items = this.props.restro.orderList
-        // const items = this.state.orderList
             .map((item, index) => {
                 subTotal += (item.price * item.qnty);
                 return <li className="list-group-item" key={index}>
@@ -142,8 +128,8 @@ const mapDispatchToProps = (dispatch) => ({
     setMenuList: (data) => {
         dispatch(setMenuList(data))
     },
-    setOrder: (data) => {
-        dispatch(setOrder(data));
+    setOrder: (data,action) => {
+        dispatch(setOrder(data,action));
     }
 })
 export default connect(mapStateToProps, mapDispatchToProps)(OrderReviewContainer);

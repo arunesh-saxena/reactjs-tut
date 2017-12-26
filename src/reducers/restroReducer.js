@@ -21,7 +21,20 @@ const restroReducers = (state = DEFAULT_STATE, action) => {
             }
             break;
         case SET_ORDER:
-            if(action.data.qnty === 0){
+            if(action.action === 'ADD'){
+                let ind = state.orderList.findIndex((v) => v.id === action.data.id);
+                const newState = {...state};
+                newState.orderList[ind] = action.data;
+                state = newState;
+
+                // state = {
+                //     ...state,
+                //     orderList: {
+                //         ...state.orderList,
+                //         newState
+                //     }
+                // }
+            }else if(action.action === 'REMOVE' || action.data.qnty === 0){
                 state = {
                     ...state,
                     orderList: state.orderList.filter((v)=>v.id !== action.data.id)
@@ -35,7 +48,7 @@ const restroReducers = (state = DEFAULT_STATE, action) => {
                     ]
                 }
             }
-           
+           console.log(state)
             break;
         case UPDATE_ORDER:
         // let isExist =  state.some((v)=>{

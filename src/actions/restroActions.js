@@ -6,8 +6,8 @@ export const setMenuList = (data) => {
     return {type: SET_MENULIST, data: data}
 };
 
-export const setOrder = (data) => {
-    return {type: SET_ORDER, data: data}
+export const setOrder = (data, action) => {
+    return {type: SET_ORDER, data: data, action: action}
 };
 
 export const updateOrder = (data) => {
