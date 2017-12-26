@@ -5,13 +5,23 @@ import './menuContainer.css';
 
 import {Header} from '../../components/restro/Header';
 import ItemListContainer from './ItemListContainer';
+import {CONSTANTS} from '../../constants';
 
 class MenuContainer extends Component {
     constructor(props) {
         super();
-        console.log('menu container')
-    }
+        console.log('menu container');
 
+    }
+    componentWillMount() {
+        fetch(CONSTANTS.api.restro.itemList)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
     render = () => {
         return (
             <div>

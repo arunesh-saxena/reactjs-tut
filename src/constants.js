@@ -32,7 +32,10 @@ export const CONSTANTS = {
         deleteTodo: `${baseURL}/deleteTodo/`,
         registerUser: `${baseURL}/singup`,
         login: `${baseURL}/login`,
-        logout: `${baseURL}/logout`
+        logout: `${baseURL}/logout`,
+        restro: {
+            itemList: './data/menuList.json'
+        }
 
     },
     getApi(term) {
