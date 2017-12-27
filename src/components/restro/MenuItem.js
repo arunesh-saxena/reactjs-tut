@@ -36,7 +36,7 @@ export const MenuItem = (props) => {
                                     }}>Add</button>}
 
                                     {props.isOrdered && <CountBtn
-                                        val={(props.orderItem.qnty) }
+                                        val={props.orderItem[0].qnty}
                                         increment={() => props.increment(props.orderItem[0])}
                                         decrement={()=>{
                                             props.decrement(props.orderItem[0]);

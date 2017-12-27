@@ -25,7 +25,6 @@ class MenuContainer extends Component {
     }
     orderList = [];
     onAddItem(item){
-        console.log('additem',item);
         if(!this.isItemInOrderList(item)){  
             let orderItem = {
                 id: item.id,
@@ -33,10 +32,8 @@ class MenuContainer extends Component {
                 qnty: 1,
                 price: item.price
             }         
-            // this.orderList.push(orderItem);
             this.props.setOrder(orderItem);
         }
-        console.log('additem',this.orderList);
     }
     isItemInOrderList(item){
         return this.orderList.some((v)=>{
@@ -46,23 +43,16 @@ class MenuContainer extends Component {
 
     onIncrementClick = (item) => {
         item.qnty++;
-        this.setState({orderList: this.orderList});
-        console.log(item);
-        // return;
+        this.props.setOrder(item,'ADD');
         
     }
     onDecrementClick = (item) => {
         item.qnty--;
         if (item.qnty === 0) {
-            let orderList = this
-                .state
-                .orderList
-                .filter((v) => {
-                    return v.id !== item.id;
-                });
+            this.props.setOrder(item, 'REMOVE');
+        }else{
+            this.props.setOrder(item,'ADD');
         }
-        this.setState({orderList: this.orderList});
-        // this.props.setOrder(orderItem);
     }
 
     render = () => {
@@ -85,8 +75,8 @@ const mapDispatchToProps = (dispatch) => ({
     setMenuList: (data) => {
         dispatch(setMenuList(data))
     },
-    setOrder: (data) => {
-        dispatch(setOrder(data));
+    setOrder: (data,action) => {
+        dispatch(setOrder(data,action));
     }
 })
 export default connect(mapStateToProps, mapDispatchToProps)(MenuContainer);

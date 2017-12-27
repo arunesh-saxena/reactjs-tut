@@ -48,7 +48,6 @@ const restroReducers = (state = DEFAULT_STATE, action) => {
                     ]
                 }
             }
-           console.log(state)
             break;
         case UPDATE_ORDER:
         // let isExist =  state.some((v)=>{
