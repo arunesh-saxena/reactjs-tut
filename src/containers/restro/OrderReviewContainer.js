@@ -14,9 +14,10 @@ class OrderReviewContainer extends Component {
             orderList: props.restro.orderList
         }
     }
-    componentWillUpdate(){
-        console.log('componentWillUpdate');
-    }
+    // componentWillMount(){
+    //     console.log('componentWillUpdate');
+    //     console.log(this.props.restro.orderList);
+    // }
     onIncrementClick = (item) => {
         item.qnty++;
         this.props.setOrder(item,'ADD');
@@ -80,6 +81,7 @@ class OrderReviewContainer extends Component {
                         <h4>Your Order</h4>
                     </div>
                 </div>
+                {(this.props.restro.orderList.length)?
                 <div className='row'>
                     <div className='col-md-12 cart-list'>
                         <ul className="list-group">
@@ -88,7 +90,8 @@ class OrderReviewContainer extends Component {
 
                         </ul>
                     </div>
-                </div>
+                </div>:''}
+                {(this.props.restro.orderList.length) ? 
                 <div className="row">
                     <div className="col-md-12">
                         <div className="cart-summary-total">
@@ -114,10 +117,18 @@ class OrderReviewContainer extends Component {
                                         </div>
                                     </div>
                                 : '')}
-
                         </div>
                     </div>
                 </div>
+                :
+                <div className='row'>
+                    <div className="col-md-12">
+                        <div className='alert alert-info'>
+                                Add some item to generate your order
+                        </div>                      
+                    </div>
+                </div>
+                }
             </div>
         );
     };

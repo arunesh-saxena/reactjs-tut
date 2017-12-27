@@ -36,7 +36,7 @@ class MenuContainer extends Component {
         }
     }
     isItemInOrderList(item){
-        return this.orderList.some((v)=>{
+        return this.props.restro.orderList.some((v)=>{
             return v.id === item.id;
         });
     }
