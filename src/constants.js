@@ -34,11 +34,27 @@ export const CONSTANTS = {
         login: `${baseURL}/login`,
         logout: `${baseURL}/logout`,
         restro: {
-            itemList: './data/menuList.json'
+            // itemList: './data/menuList.json', 
+            itemList: `${baseURL}/menu/list`,
+            addMenu: `${baseURL}/menu/add`
         }
 
     },
     getApi(term) {
         return `${this.baseURL}${this.api['todoLiist']}`;
+    },
+    restro:{
+        orderStatus:{
+            'PENDING': 1,
+            1: 'PENDING',
+            'ACCEPTED': 2,
+            2:'ACCEPTED',
+            'PROCESSING': 3,
+            3: 'PROCESSING',
+            'COMPLETED': 4,
+            4: 'COMPLETED',
+            'DELIVERED': 5,
+            5: 'DELIVERED'
+        }
     }
 }

@@ -15,6 +15,7 @@ export const Header = (props) => {
 
                             </div>
                             <NavLink className="nav-link" exact activeClassName="active" to='/menu'>menu</NavLink>
+                            <NavLink className="nav-link" exact activeClassName="active" to='/menu/upload'>upload</NavLink>
                             <NavLink className="nav-link" exact activeClassName="active" to='/order/status/2'>order</NavLink>
                         </nav>
                     </div>

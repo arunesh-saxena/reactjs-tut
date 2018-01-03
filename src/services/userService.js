@@ -16,8 +16,8 @@ const loginUser = data => {
 		return fetch(CONSTANTS.api.login, {
 					method: 'POST',
 					headers: {
-									Accept: 'application/json',
-									'Content-Type': 'application/json'
+						Accept: 'application/json',
+						'Content-Type': 'application/json'
 					},
 					body: data
 		}).then((res)=>res.json())
