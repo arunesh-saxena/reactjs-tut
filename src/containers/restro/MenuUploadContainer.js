@@ -10,12 +10,12 @@ class MenuUploadContainer extends Component {
     constructor(props) {
         super();
         this.state = {
-            itemName: 'hello',
-            description: 'helkdoskds',
-            imageURL: 'dsds',
-            price: 11,
-            unit: 'dsds',
-            currency: 'dsds',
+            itemName: '',
+            description: '',
+            imageURL: '',
+            price: '',
+            unit: '',
+            currency: '',
             formErrors: {
                 username: '',
                 password: ''
@@ -35,8 +35,6 @@ class MenuUploadContainer extends Component {
 
     uploadMenu(event) {
         event.preventDefault();
-        let data = new FormData();
-        console.log(this.fileInput.value)
         let menuData = {
             itemName: this.state.itemName,
             description: this.state.description,
@@ -45,24 +43,16 @@ class MenuUploadContainer extends Component {
             unit: this.state.unit,
             currency: this.state.currency
         };
-        /* data.append('itemName', menuData.itemName);
+        let data = new FormData();
+        data.append('itemName', menuData.itemName);
         data.append('description', menuData.description);
         data.append('price', menuData.price);
         data.append('unit', menuData.unit);
-        data.append('currency', menuData.currency); */
-        // data.append('imageURL', menuData.imageURL);
-        data.append('imageURL', this.fileInput.value);
-        menuData = JSON.stringify(menuData);
-        console.log(menuData)
-        console.log(data)
-        // return;
+        data.append('currency', menuData.currency); 
+        data.append('imageURL', this.fileInput.files[0]);
+        // menuData = JSON.stringify(menuData);
         fetch(CONSTANTS.api.restro.addMenu, {
             method: 'POST',
-            headers: {
-                // 'Content-Type': 'multipart/form-data'
-                // 'Content-Type': 'application/json'
-            },
-            // body: menuData,
             body: data
         }).then((res) => res.json()).then((res) => {
             console.log(res);
@@ -123,7 +113,14 @@ class MenuUploadContainer extends Component {
                                         {userNameError}
                                     </div>
                                     <div className="form-group">
-                                        <input
+                                    <textarea name="body"
+                                        name="description"
+                                        id="description"
+                                        tabIndex="2"
+                                        className="form-control"
+                                        onChange={(event) => this.handleUserInput(event)}
+                                            value={this.state.description}/>
+                                        {/* <input
                                             type="text"
                                             name="description"
                                             id="description"
@@ -131,7 +128,7 @@ class MenuUploadContainer extends Component {
                                             className="form-control"
                                             placeholder="Description"
                                             value={this.state.description}
-                                            onChange={(event) => this.handleUserInput(event)}></input>
+                                            onChange={(event) => this.handleUserInput(event)}></input> */}
                                     </div>
 
                                     <div className="form-group">
@@ -142,8 +139,8 @@ class MenuUploadContainer extends Component {
                                             tabIndex="3"
                                             className="form-control"
                                             placeholder="imageURL"
-                                            ref={(input) => { this.fileInput = input; }}
-                                            onChange={this.handleFileUpload}></input>
+                                            ref={(file) => { this.fileInput = file; }}
+                                            onChange={this.handleUserInput}></input>
                                     </div>
                                     <div className="form-group">
                                         <input
