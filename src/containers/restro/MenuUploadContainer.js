@@ -56,10 +56,39 @@ class MenuUploadContainer extends Component {
             body: data
         }).then((res) => res.json()).then((res) => {
             console.log(res);
+            if(res.success){
+                alert('Item add successfully.');
+                this.resetForm();
+            }else{
+                alert('Something went wrong!!');
+            }
         }).catch(error => {
             console.error(error);
         });
 
+    }
+    resetForm = () =>{
+        this.setState({
+            itemName: '',
+            description: '',
+            imageURL: '',
+            price: '',
+            unit: '',
+            currency: '',
+            formErrors: {
+                username: '',
+                password: ''
+            },
+            isValid: {
+                username: false,
+                password: false
+            },
+            formValid: true,
+            touch: {
+                username: false,
+                password: false
+            }
+        })
     }
     handleFileUpload({ file }) {
         const file1 = file;
@@ -87,7 +116,7 @@ class MenuUploadContainer extends Component {
         return (
             <div>
                 <div className="container">
-                    <Header title='Select Your Order'/>
+                    <Header title='Add Menu Item'/>
                     <div className='body-padding-top'>
                         <div className="row">
                             <div className="col-lg-12">
@@ -107,7 +136,7 @@ class MenuUploadContainer extends Component {
                                             id="itemName"
                                             tabIndex="1"
                                             className="form-control"
-                                            placeholder="ItemName"
+                                            placeholder="Item Name"
                                             value={this.state.itemName}
                                             onChange={(event) => this.handleUserInput(event)}></input>
                                         {userNameError}
@@ -118,17 +147,10 @@ class MenuUploadContainer extends Component {
                                         id="description"
                                         tabIndex="2"
                                         className="form-control"
+                                        rows="6"
+                                        placeholder="Description"
                                         onChange={(event) => this.handleUserInput(event)}
-                                            value={this.state.description}/>
-                                        {/* <input
-                                            type="text"
-                                            name="description"
-                                            id="description"
-                                            tabIndex="2"
-                                            className="form-control"
-                                            placeholder="Description"
-                                            value={this.state.description}
-                                            onChange={(event) => this.handleUserInput(event)}></input> */}
+                                        value={this.state.description}/>
                                     </div>
 
                                     <div className="form-group">
@@ -149,7 +171,7 @@ class MenuUploadContainer extends Component {
                                             id="price"
                                             tabIndex="4"
                                             className="form-control"
-                                            placeholder="price"
+                                            placeholder="Price"
                                             value={this.state.price}
                                             onChange={(event) => this.handleUserInput(event)}></input>
                                     </div>
@@ -160,7 +182,7 @@ class MenuUploadContainer extends Component {
                                             id="unit"
                                             tabIndex="5"
                                             className="form-control"
-                                            placeholder="unit"
+                                            placeholder="Unit"
                                             value={this.state.unit}
                                             onChange={(event) => this.handleUserInput(event)}></input>
                                     </div>
@@ -171,7 +193,7 @@ class MenuUploadContainer extends Component {
                                             id="currency"
                                             tabIndex="6"
                                             className="form-control"
-                                            placeholder="currency"
+                                            placeholder="Currency"
                                             value={this.state.currency}
                                             onChange={(event) => this.handleUserInput(event)}></input>
                                     </div>

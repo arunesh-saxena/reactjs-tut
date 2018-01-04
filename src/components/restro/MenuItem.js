@@ -3,6 +3,7 @@ import "./menuItem.css";
 
 import {CurrencyInr} from './common/utility';
 import {CountBtn} from '../../components/restro/common/countBtn';
+import {CONSTANTS} from '../../constants';
 
 export const MenuItem = (props) => {
     return (
@@ -10,7 +11,7 @@ export const MenuItem = (props) => {
             <div className="row">
                 <div className="col-md-3">
                     <img
-                        src={props.item.imageURL}
+                        src={`${CONSTANTS.baseURL}/${props.item.imageURL}`}
                         alt={props.item.itemName}
                         className="img-thumbnail"></img>
                 </div>

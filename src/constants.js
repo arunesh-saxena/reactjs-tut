@@ -7,7 +7,7 @@
 //         key:'value'
 //     }
 // }
-const baseURL = 'http://localhost:3000/api';
+const baseAPIURL = 'http://localhost:3000/api';
 export const CONSTANTS = {
     baseURL: 'http://localhost:3000',
     serviceUrl: '',
@@ -25,23 +25,23 @@ export const CONSTANTS = {
         header: 'common/components/header/header.tpl.html',
     },
     api: {
-        todoList: `${baseURL}/getTodolist`,
-        addTodoList: `${baseURL}/addTodo`,
-        updateTodo: `${baseURL}/updateTodo`,
-        // deleteTodo:`${baseURL}/deleteTodo/:id`
-        deleteTodo: `${baseURL}/deleteTodo/`,
-        registerUser: `${baseURL}/singup`,
-        login: `${baseURL}/login`,
-        logout: `${baseURL}/logout`,
+        todoList: `${baseAPIURL}/getTodolist`,
+        addTodoList: `${baseAPIURL}/addTodo`,
+        updateTodo: `${baseAPIURL}/updateTodo`,
+        // deleteTodo:`${baseAPIURL}/deleteTodo/:id`
+        deleteTodo: `${baseAPIURL}/deleteTodo/`,
+        registerUser: `${baseAPIURL}/singup`,
+        login: `${baseAPIURL}/login`,
+        logout: `${baseAPIURL}/logout`,
         restro: {
             // itemList: './data/menuList.json', 
-            itemList: `${baseURL}/menu/list`,
-            addMenu: `${baseURL}/menu/add`
+            itemList: `${baseAPIURL}/menu/list`,
+            addMenu: `${baseAPIURL}/menu/add`
         }
 
     },
     getApi(term) {
-        return `${this.baseURL}${this.api['todoLiist']}`;
+        return `${this.baseAPIURL}${this.api['todoLiist']}`;
     },
     restro:{
         orderStatus:{
