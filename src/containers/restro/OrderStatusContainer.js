@@ -1,10 +1,16 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 import './OrderStatusContainer.css';
 
 import {Header} from '../../components/restro/Header';
-import OrderReviewContainer from './OrderReviewContainer';
+import {OrderReviewList} from '../../components/restro/OrderReviewList';
+import {setMenuList, setOrder} from '../../actions/restroActions';
 
 class OrderStatusContainer extends React.Component {
+    // constructor(props) {
+    //     super();
+    // }
     render() {
         return (
             <div>
@@ -13,7 +19,7 @@ class OrderStatusContainer extends React.Component {
                     <div className='body-padding-top'>
                         <div className="row">
                             <div className='col-md-6'>
-                                <OrderReviewContainer isReadOnly='true'/>
+                                <OrderReviewList isReadOnly='true' orderList={this.props.restro.orderList}/>
                             </div>
                             <div className='col-md-6'>
                                 <div className='row'>
@@ -45,4 +51,15 @@ class OrderStatusContainer extends React.Component {
     }
 }
 
-export default OrderStatusContainer;
+
+
+const mapStateToProps = (state) => ({restro: state.restro});
+const mapDispatchToProps = (dispatch) => ({
+    setMenuList: (data) => {
+        dispatch(setMenuList(data))
+    },
+    setOrder: (data,action) => {
+        dispatch(setOrder(data,action));
+    }
+})
+export default connect(mapStateToProps, mapDispatchToProps)(OrderStatusContainer);

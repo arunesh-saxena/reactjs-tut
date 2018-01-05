@@ -5,6 +5,7 @@ import './OrderReviewContainer.css';
 
 import {CountBtn} from '../../components/restro/common/countBtn';
 import {CurrencyInr} from '../../components/restro/common/utility';
+import {OrderReviewList} from '../../components/restro/OrderReviewList';
 import {setMenuList, setOrder} from '../../actions/restroActions';
 
 class OrderReviewContainer extends Component {
@@ -31,7 +32,7 @@ class OrderReviewContainer extends Component {
         }
         
     }
-    onContinue () {
+    onContinueClick () {
         console.log(this.props,this.context);
         this.props.history.push('/order/status/2');
     }
@@ -75,61 +76,10 @@ class OrderReviewContainer extends Component {
             });
 
         return (
-            <div className='fixed-order'>
-                <div className='row'>
-                    <div className='col-md-12'>
-                        <h4>Your Order</h4>
-                    </div>
-                </div>
-                {(this.props.restro.orderList.length)?
-                <div className='row'>
-                    <div className='col-md-12 cart-list'>
-                        <ul className="list-group">
-
-                            {items}
-
-                        </ul>
-                    </div>
-                </div>:''}
-                {(this.props.restro.orderList.length) ? 
-                <div className="row">
-                    <div className="col-md-12">
-                        <div className="cart-summary-total">
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <div className="totals clear">
-                                        <span className="name">Subtotal</span>
-                                        <span className="price">
-                                            <CurrencyInr
-                                                item={{
-                                                price: subTotal
-                                            }}/></span>
-                                    </div>
-                                </div>
-                            </div>
-                            {(this.props.isSubmitBtn
-                                ? <div className="row">
-                                        <div className="col-md-12">
-                                            <button
-                                                type="button"
-                                                className="btn btn-success btn-lg btn-block"
-                                                onClick={this.onContinue.bind(this)}>Continue</button>
-                                        </div>
-                                    </div>
-                                : '')}
-                        </div>
-                    </div>
-                </div>
-                :
-                <div className='row'>
-                    <div className="col-md-12">
-                        <div className='alert alert-info'>
-                                Add some item to generate your order
-                        </div>                      
-                    </div>
-                </div>
-                }
+            <div>
+                 <OrderReviewList onContinue={()=>{this.onContinueClick()}} orderList={this.props.restro.orderList} onIncrement={this.onIncrementClick} onDecrement={this.onDecrementClick}/>
             </div>
+           
         );
     };
 }
