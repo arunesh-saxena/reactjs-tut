@@ -38,43 +38,6 @@ class OrderReviewContainer extends Component {
     }
 
     render() {
-        let subTotal = 0;
-        const items = this.props.restro.orderList
-            .map((item, index) => {
-                subTotal += (item.price * item.qnty);
-                return <li className="list-group-item" key={index}>
-                    <div className='cart-item'>
-                        <div className="details clearfix">
-                            <div className="name">{item.name}</div>
-                        </div>
-                        <span>
-                            <span className="count">
-                                <div className="super_number menu">
-                                    <CountBtn
-                                        isReadOnly={this.props.isReadOnly}
-                                        val={item.qnty}
-                                        increment={() => this.onIncrementClick(item)}
-                                        decrement={() => this.onDecrementClick(item)}/>
-                                </div>
-                            </span>
-                            <span className="quantity">
-                                <span className="x-icon">×</span>
-                                <CurrencyInr
-                                    item={{
-                                    price: item.price
-                                }}/>
-                            </span>
-                            <span className="price item-price">
-                                <CurrencyInr
-                                    item={{
-                                    price: (item.price * item.qnty)
-                                }}/></span>
-                        </span>
-                        <div className="clear"></div>
-                    </div>
-                </li>
-            });
-
         return (
             <div>
                  <OrderReviewList onContinue={()=>{this.onContinueClick()}} orderList={this.props.restro.orderList} onIncrement={this.onIncrementClick} onDecrement={this.onDecrementClick}/>
