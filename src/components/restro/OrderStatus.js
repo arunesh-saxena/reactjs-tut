@@ -3,7 +3,7 @@ import "./OrderStatus.css";
 
 import {CONSTANTS} from '../../constants';
 export const OrderStatus = (props) => {
-    const s=(status)=>{
+    const orderStatusChange=(status)=>{
         props.onOrderStatusChange(status);
     };
     return (
