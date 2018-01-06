@@ -12,11 +12,10 @@ export const Header = (props) => {
                             <div className="navbar-brand mb-0 h1">Restro</div>
                             <div className="header-text navbar-text mb-0 h3">
                                 {props.title}
-
                             </div>
-                            <NavLink className="nav-link" exact activeClassName="active" to='/menu'>menu</NavLink>
-                            <NavLink className="nav-link" exact activeClassName="active" to='/menu/upload'>upload</NavLink>
-                            <NavLink className="nav-link" exact activeClassName="active" to='/order/status/2'>order</NavLink>
+                            <NavLink className="nav-link" exact activeClassName="active" to='/restro/menu'>menu</NavLink>
+                            <NavLink className="nav-link" exact activeClassName="active" to='/restro/menu/upload'>upload</NavLink>
+                            <NavLink className="nav-link" exact activeClassName="active" to='/restro/order/status/2'>order</NavLink>
                         </nav>
                     </div>
                 </div>

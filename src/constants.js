@@ -36,7 +36,8 @@ export const CONSTANTS = {
         restro: {
             // itemList: './data/menuList.json', 
             itemList: `${baseAPIURL}/menu/list`,
-            addMenu: `${baseAPIURL}/menu/add`
+            addMenu: `${baseAPIURL}/menu/add`,
+            addOrder: `${baseAPIURL}/order/add/`
         }
 
     },

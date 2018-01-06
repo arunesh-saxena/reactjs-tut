@@ -30,7 +30,9 @@ class MenuContainer extends Component {
                 id: item.id,
                 name: item.itemName,
                 qnty: 1,
-                price: item.price
+                price: item.price,
+                itemCode: item.itemCode,
+                unit: item.unit
             }         
             this.props.setOrder(orderItem);
         }

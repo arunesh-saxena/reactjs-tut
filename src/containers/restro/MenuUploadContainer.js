@@ -142,7 +142,7 @@ class MenuUploadContainer extends Component {
                                         {userNameError}
                                     </div>
                                     <div className="form-group">
-                                    <textarea name="body"
+                                    <textarea
                                         name="description"
                                         id="description"
                                         tabIndex="2"

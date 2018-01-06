@@ -1,11 +1,9 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
 
 import './OrderReviewList.css';
 
 import {CountBtn} from '../../components/restro/common/countBtn';
 import {CurrencyInr} from '../../components/restro/common/utility';
-import {setMenuList, setOrder} from '../../actions/restroActions';
 
 export const OrderReviewList=(props) => {
     

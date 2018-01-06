@@ -3,11 +3,13 @@ import {connect} from 'react-redux';
 
 import './OrderReviewContainer.css';
 
-import {CountBtn} from '../../components/restro/common/countBtn';
-import {CurrencyInr} from '../../components/restro/common/utility';
 import {OrderReviewList} from '../../components/restro/OrderReviewList';
 import {setMenuList, setOrder} from '../../actions/restroActions';
 
+import {CONSTANTS} from '../../constants';
+Array.prototype.clone = function() {
+	return this.slice(0);
+};
 class OrderReviewContainer extends Component {
     constructor(props) {
         super();
@@ -15,10 +17,8 @@ class OrderReviewContainer extends Component {
             orderList: props.restro.orderList
         }
     }
-    // componentWillMount(){
-    //     console.log('componentWillUpdate');
-    //     console.log(this.props.restro.orderList);
-    // }
+    
+    tableNum = 2;
     onIncrementClick = (item) => {
         item.qnty++;
         this.props.setOrder(item,'ADD');
@@ -33,8 +33,33 @@ class OrderReviewContainer extends Component {
         
     }
     onContinueClick () {
-        console.log(this.props,this.context);
-        this.props.history.push('/order/status/2');
+        const orderItems = this.props.restro.orderList.slice(0);
+        let items = [], temp = {};
+        orderItems.forEach(item=>{
+            temp = Object.assign({}, item);
+            delete temp.name;
+            items.push(temp);
+        });
+        let orderData = {
+            orderBy: this.tableNum,
+            items: items
+        };            
+
+        fetch(CONSTANTS.api.restro.addOrder, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        }).then((res)=>res.json())
+		.then((res) => {
+            console.log(res)
+            
+        this.props.history.push(`/order/status/${res.data.id}`);
+		}).catch(error => {
+            console.error(error);
+		});
     }
 
     render() {

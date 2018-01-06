@@ -8,9 +8,12 @@ import {OrderReviewList} from '../../components/restro/OrderReviewList';
 import {setMenuList, setOrder} from '../../actions/restroActions';
 
 class OrderStatusContainer extends React.Component {
-    // constructor(props) {
-    //     super();
-    // }
+    constructor(props) {
+        super();
+    }
+    resetOrder(){
+        
+    }
     render() {
         return (
             <div>

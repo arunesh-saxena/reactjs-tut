@@ -16,9 +16,7 @@ import {setUserStatus} from '../actions/userActions';
 
 
 /* Restro */
-import MenuContainer from './restro/MenuContainer';
-import MenuUploadContainer from './restro/MenuUploadContainer';
-import OrderStatusContainer from './restro/OrderStatusContainer';
+import RestroContainer from './restro/RestroContainer';
 
 class App extends React.Component {
   constructor() {
@@ -44,11 +42,9 @@ checkUserStatus (){
         {/*<Switch>*/}
         <div>
           <Switch>
-            <Route exact path="/menu/upload/" component ={MenuUploadContainer}/>
-            <Route path="/menu/" component ={MenuContainer}/>
-            <Route path="/order/review/" render={() => <div>this is cutomer window page</div>}/>
-            <Route path="/order/status/:id" component={OrderStatusContainer}/>
-
+            {/*----Restro-----  */} 
+            <Route path='/restro/' component= {RestroContainer}/>
+            
             <Route path="/" render={(path) => {
               return (
                 <div>
@@ -56,7 +52,6 @@ checkUserStatus (){
                 </div>
               )
             }}/>
-            {/*----Restro-----  */}
             
             <Route exact component={NoMatch}/>
           </Switch>

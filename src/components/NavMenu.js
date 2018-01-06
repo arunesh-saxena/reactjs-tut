@@ -45,6 +45,9 @@ export const NavMenu = (props) => {
                             <li className="nav-item">
                                 <NavLink className="nav-link" activeClassName='active' to={"/socket/"}>Socket</NavLink>
                             </li>
+                            <li className="nav-item">
+                            <NavLink className="nav-link" exact activeClassName="active" to='/restro/'>Restro</NavLink>
+                            </li>
 
                     </ul>
                 </div>
