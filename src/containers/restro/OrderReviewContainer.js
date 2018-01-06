@@ -7,9 +7,7 @@ import {OrderReviewList} from '../../components/restro/OrderReviewList';
 import {setMenuList, setOrder} from '../../actions/restroActions';
 
 import {CONSTANTS} from '../../constants';
-Array.prototype.clone = function() {
-	return this.slice(0);
-};
+
 class OrderReviewContainer extends Component {
     constructor(props) {
         super();
@@ -17,8 +15,15 @@ class OrderReviewContainer extends Component {
             orderList: props.restro.orderList
         }
     }
-    
+    componentWillMount(){
+        this.resetOrder();
+    }
     tableNum = 2;
+
+    resetOrder(){
+        this.props.setOrder({}, 'RESET');
+    }
+     
     onIncrementClick = (item) => {
         item.qnty++;
         this.props.setOrder(item,'ADD');
@@ -34,15 +39,15 @@ class OrderReviewContainer extends Component {
     }
     onContinueClick () {
         const orderItems = this.props.restro.orderList.slice(0);
-        let items = [], temp = {};
+        /* let items = [], temp = {};
         orderItems.forEach(item=>{
             temp = Object.assign({}, item);
             delete temp.name;
             items.push(temp);
-        });
+        }); */
         let orderData = {
             orderBy: this.tableNum,
-            items: items
+            items: orderItems
         };            
 
         fetch(CONSTANTS.api.restro.addOrder, {
@@ -55,8 +60,10 @@ class OrderReviewContainer extends Component {
         }).then((res)=>res.json())
 		.then((res) => {
             console.log(res)
+            if(res.success){
+                this.props.history.push(`/restro/order/status/${res.data.id}`);
+            }
             
-        this.props.history.push(`/order/status/${res.data.id}`);
 		}).catch(error => {
             console.error(error);
 		});

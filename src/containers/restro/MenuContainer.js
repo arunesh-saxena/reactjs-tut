@@ -28,7 +28,7 @@ class MenuContainer extends Component {
         if(!this.isItemInOrderList(item)){  
             let orderItem = {
                 id: item.id,
-                name: item.itemName,
+                itemName: item.itemName,
                 qnty: 1,
                 price: item.price,
                 itemCode: item.itemCode,

@@ -24,7 +24,7 @@ export const OrderReviewList=(props) => {
                 return <li className="list-group-item" key={index}>
                     <div className='cart-item'>
                         <div className="details clearfix">
-                            <div className="name">{item.name}</div>
+                            <div className="name">{item.itemName}</div>
                         </div>
                         <span>
                             <span className="count">

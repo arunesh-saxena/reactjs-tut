@@ -7,12 +7,49 @@ import {Header} from '../../components/restro/Header';
 import {OrderReviewList} from '../../components/restro/OrderReviewList';
 import {setMenuList, setOrder} from '../../actions/restroActions';
 
+import {CONSTANTS} from '../../constants';
+
 class OrderStatusContainer extends React.Component {
     constructor(props) {
         super();
     }
+    componentWillMount(){
+        this.resetOrder();
+    }
     resetOrder(){
-        
+        this.props.setOrder({}, 'RESET');
+        this.orderId = this.props.match.params.id;
+        this.getOrderDetails(this.orderId);
+    }
+    orderId : '';
+    getOrderDetails(orderId){
+        // http://localhost:3000/api/order/21
+        fetch(`${CONSTANTS.api.restro.getOrder}${orderId}`)
+        .then(res=> res.json())
+        .then(res=>{
+            if(res.success){
+                this.setOrderList(res.data.items);
+            }
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+
+    }
+
+    setOrderList = (list) => {
+        let order = {};
+        list.map(elm => {
+            order  = {
+                id: elm.id,
+                itemName: elm.itemName,
+                qnty: elm.qnty,
+                price: elm.price,
+                itemCode: elm.itemCode,
+                unit: elm.unit
+            };
+            this.props.setOrder(order);
+        });
     }
     render() {
         return (

@@ -26,20 +26,17 @@ const restroReducers = (state = DEFAULT_STATE, action) => {
                 const newState = {...state};
                 newState.orderList[ind] = action.data;
                 state = newState;
-
-                // state = {
-                //     ...state,
-                //     orderList: {
-                //         ...state.orderList,
-                //         newState
-                //     }
-                // }
             }else if(action.action === 'REMOVE' || action.data.qnty === 0){
                 state = {
                     ...state,
                     orderList: state.orderList.filter((v)=>v.id !== action.data.id)
                 }
-            }else{
+            }else if(action.action === 'RESET'){
+                state = {
+                    ...state,
+                    orderList: []
+                }
+            }else {
                 state = {
                     ...state,
                     orderList: [
