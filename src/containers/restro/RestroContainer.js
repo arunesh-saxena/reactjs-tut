@@ -8,7 +8,7 @@ import MenuContainer from './MenuContainer';
 import MenuUploadContainer from './MenuUploadContainer';
 import OrderStatusContainer from './OrderStatusContainer';
 
-import {Header} from '../../components/restro/Header';
+// import {Header} from '../../components/restro/Header';
 
 class RestroContainer extends React.Component {
     constructor(props) {

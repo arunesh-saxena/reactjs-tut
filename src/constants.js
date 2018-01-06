@@ -48,15 +48,15 @@ export const CONSTANTS = {
     restro:{
         orderStatus:{
             'PENDING': 1,
-            1: 'PENDING',
+            1: 'Pending',
             'ACCEPTED': 2,
-            2:'ACCEPTED',
+            2:'Accepted',
             'PROCESSING': 3,
-            3: 'PROCESSING',
+            3: 'Processing',
             'COMPLETED': 4,
-            4: 'COMPLETED',
+            4: 'Completed',
             'DELIVERED': 5,
-            5: 'DELIVERED'
+            5: 'Delivered'
         }
     }
 }

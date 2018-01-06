@@ -1,17 +1,14 @@
-const SET_MENULIST = 'SET_MENULIST';
-const SET_ORDER = 'SET_ORDER';
-const UPDATE_ORDER = 'UPDATE_ORDER';
+const SET_MENULIST = 'SET_MENULIST',
+    SET_ORDER = 'SET_ORDER',
+    UPDATE_ORDER_DETAIL = 'UPDATE_ORDER_DETAIL',
+    SET_ORDER_DETAIL = 'SET_ORDERDETAIL';
 
 const DEFAULT_STATE = {
     menuList: [],
-    orderList: []
+    orderList: [],
+    orderDetail: []
 };
 
-// cont isItemInOrderList = (item) => {
-//     return state.some((v)=>{
-//         return v.id === item.id;
-//     });
-// };
 const restroReducers = (state = DEFAULT_STATE, action) => {
     switch (action.type) {
         case SET_MENULIST:
@@ -20,6 +17,7 @@ const restroReducers = (state = DEFAULT_STATE, action) => {
                 menuList: action.data
             }
             break;
+            /* order list */
         case SET_ORDER:
             if(action.action === 'ADD'){
                 let ind = state.orderList.findIndex((v) => v.id === action.data.id);
@@ -46,16 +44,20 @@ const restroReducers = (state = DEFAULT_STATE, action) => {
                 }
             }
             break;
-        case UPDATE_ORDER:
-        // let isExist =  state.some((v)=>{
-        //                 return v.id === item.id;
-        //             });
-            state= {
+            /* order details */
+        case SET_ORDER_DETAIL:
+            state = {
                 ...state,
-                orderList: [
+                orderDetail: [
                     action.data
                 ]
             }
+            break;
+        case UPDATE_ORDER_DETAIL:
+            let ind = state.orderDetail.findIndex((v) => v.id === action.orderId);
+            const newState = {...state};
+            newState.orderDetail[ind].status = action.status;
+            state = newState;
             break;
         default:
             return state;
