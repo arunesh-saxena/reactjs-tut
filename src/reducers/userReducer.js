@@ -1,5 +1,5 @@
 const initialState = {
-    user:{
+    userData:{
         username: null,
         email: null,
         id: null
@@ -11,10 +11,10 @@ const userReducer = (state = initialState, action) => {
         case "LOGIN":
             state = {
                 ...state,
-                user: {
-                    username: action.data.username,
-                    email: action.data.email,
-                    id: action.data.id,
+                userData: {
+                    username: action.data.userData.username,
+                    email: action.data.userData.email,
+                    id: action.data.userData.id,
                 },
                 isLoggedIn: true
             }
@@ -22,7 +22,7 @@ const userReducer = (state = initialState, action) => {
         case "LOGOUT":
             state = {
                 ...state,
-                user: {
+                userData: {
                     username: null,
                     email: null,
                     id: null
@@ -31,12 +31,13 @@ const userReducer = (state = initialState, action) => {
             }
             break;
         case "SET_USER_STATUS":
+        console.log(action)
             state = {
                 ...state,
-                user: {
-                    username: action.data.username,
-                    email: action.data.email,
-                    id: action.data.id,
+                userData: {
+                    username: action.data.userData.username,
+                    email: action.data.userData.email,
+                    id: action.data.userData.id,
                 },
                 isLoggedIn: action.data.status
             }

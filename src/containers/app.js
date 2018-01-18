@@ -3,17 +3,12 @@ import React from 'react';
 
 import {connect} from 'react-redux';
 
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 import DemoContainer from './DemoContainer';
 import NoMatch from '../components/NoMatch';
 import {userService} from '../services/userService';
 import {setUserStatus} from '../actions/userActions';
-
 
 /* Restro */
 import RestroContainer from './restro/RestroContainer';
@@ -26,14 +21,23 @@ class App extends React.Component {
   componentWillMount() {
     console.log(this.props.user.isLoggedIn);
     this.checkUserStatus();
-   
-}
-checkUserStatus (){
-  this.props.setUserStatus({
-    status: userService.isUserLoggedIn(),
-    userData: userService.getLoggedinUser()
-  });    
-}
+
+  }
+  checkUserStatus() {
+    const userData = {
+      status: userService.isUserLoggedIn(),
+      userData: userService.getLoggedinUser()
+    };
+    if (userData.status) {
+      this
+        .props
+        .setUserStatus({
+          status: userService.isUserLoggedIn(),
+          userData: userService.getLoggedinUser()
+        });
+
+    }
+  }
   render() {
     return (
 
@@ -42,17 +46,19 @@ checkUserStatus (){
         {/*<Switch>*/}
         <div>
           <Switch>
-            {/*----Restro-----  */} 
-            <Route path='/restro/' component= {RestroContainer}/>
-            
-            <Route path="/" render={(path) => {
+            {/*----Restro-----  */}
+            <Route path='/restro/' component={RestroContainer}/>
+
+            <Route
+              path="/"
+              render={(path) => {
               return (
                 <div>
                   <DemoContainer/>
                 </div>
               )
             }}/>
-            
+
             <Route exact component={NoMatch}/>
           </Switch>
         </div>

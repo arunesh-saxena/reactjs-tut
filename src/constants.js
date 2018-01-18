@@ -39,6 +39,7 @@ export const CONSTANTS = {
             addMenu: `${baseAPIURL}/menu/add`,
             addOrder: `${baseAPIURL}/order/add/`,
             getOrder: `${baseAPIURL}/order/`,//`${baseAPIURL}/api/order/:id`
+            updateOrder: `${baseAPIURL}/order/`//`${baseAPIURL}/api/order/:id`
         }
 
     },

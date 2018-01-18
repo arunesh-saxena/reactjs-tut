@@ -46,11 +46,11 @@ class LoginContainer extends React.Component {
                         success: true
                     }
                 });
-                this.props.login({
+                this.props.login({userData :{
                     username: res.data.username,
                     email: res.data.email,
                     id: res.data._id
-                });
+                }});
                 this.props.history.push('/home');
             }else {
               this.setState({

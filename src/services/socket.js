@@ -18,7 +18,7 @@ function unSubscribeToMsg() {
 }
 
 function emitMsg(data) {
-    socket.emit('subscribeToMsg', {msg: data.msg});
+    socket.emit('subscribeToMsg', data);
 }
 
 socket.on('disconnect', (reason) => {

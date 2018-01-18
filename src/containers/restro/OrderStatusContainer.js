@@ -8,17 +8,32 @@ import {OrderReviewList} from '../../components/restro/OrderReviewList';
 import {OrderStatus} from '../../components/restro/OrderStatus';
 import {setMenuList, setOrder, setOrderDetail, updateOrder} from '../../actions/restroActions';
 
+import {subscribeToMsg, unSubscribeToMsg, emitMsg} from '../../services/socket';
+
 import {CONSTANTS} from '../../constants';
 
 class OrderStatusContainer extends React.Component {
     constructor(props) {
         super();
         this.state = {
-            orderDetail: []
+            orderDetail: [],
+            isLoggedIn: false
         }
     }
     componentWillMount() {
         this.resetOrder();
+        subscribeToMsg((err, data) => {     
+            this.setOrderDetail(data.orderDetails);
+        });
+    }
+    componentWillUnmount() {
+        unSubscribeToMsg();
+    }
+    componentDidMount(){
+        this.setState({
+            isLoggedIn: this.props.user.isLoggedIn
+        })
+
     }
     resetOrder() {
         this
@@ -27,8 +42,9 @@ class OrderStatusContainer extends React.Component {
         this.orderId = this.props.match.params.id;
         this.getOrderDetails(this.orderId);
     }
+
     orderId = null;
-    statusChangeAction = true;
+
     getOrderDetails(orderId) {
         // http://localhost:3000/api/order/21
         fetch(`${CONSTANTS.api.restro.getOrder}${orderId}`)
@@ -71,12 +87,47 @@ class OrderStatusContainer extends React.Component {
     }
 
     onOrderStatusClick = (orderStatus) => {
-        this
-        .props
-        .updateOrder({
-            orderId: parseInt(this.orderId, Number),
-            status: orderStatus
+        const orderId = this.orderId,
+        orderBy = 'Table 1',/* TODO */
+        items = [],
+        orderList = this.props.restro.orderList;
+
+        orderList.map(elm=>{
+            items.push({
+                "id": elm.id,
+                "qnty": elm.qnty
+            })
         });
+
+        const data = {
+            "orderBy": orderBy,
+            "items": items,
+            "id": orderId,
+            "status": orderStatus
+        };
+         fetch(`${CONSTANTS.api.restro.updateOrder}${orderId}`, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (res.success) {
+                    this.setOrderDetail(res.data);
+                    this.emitOrderStatus(res.data);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+    }
+    emitOrderStatus = (data) => {
+        const orderDetails = data;
+        emitMsg({msg:'order status change',orderDetails:orderDetails});
     }
     getOrder(orderId){
         let orderDetail = this.props.restro.orderDetail;
@@ -90,7 +141,10 @@ class OrderStatusContainer extends React.Component {
     getOrderStatus(orderId) {
         let orderDetail = this.getOrder(orderId);
         if(!!orderDetail){
-            return CONSTANTS.restro.orderStatus[orderDetail.status];
+            return {
+                orderStatus: orderDetail.status,
+                orderStatusTxt: CONSTANTS.restro.orderStatus[orderDetail.status]
+            }
         }
         return 0;
     }
@@ -107,8 +161,8 @@ class OrderStatusContainer extends React.Component {
                             <div className='col-md-6'>
                                 <OrderStatus
                                     tokenNum={this.orderId}
-                                    orderStatusTxt={this.getOrderStatus(this.orderId)}
-                                    isActionBtn={this.statusChangeAction}
+                                    orderStatus={this.getOrderStatus(this.orderId)}
+                                    isActionBtn={this.props.user.isLoggedIn}
                                     onOrderStatusChange={this.onOrderStatusClick}/>
                             </div>
                         </div>
@@ -119,7 +173,7 @@ class OrderStatusContainer extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({restro: state.restro});
+const mapStateToProps = (state) => ({restro: state.restro, user:state.user});
 const mapDispatchToProps = (dispatch) => ({
     setMenuList: (data) => {
         dispatch(setMenuList(data))
