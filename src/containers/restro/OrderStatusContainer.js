@@ -129,6 +129,20 @@ class OrderStatusContainer extends React.Component {
         const orderDetails = data;
         emitMsg({msg:'order status change',orderDetails:orderDetails});
     }
+    getOrderBy() {
+        const orderDetail = this.props.restro.orderDetail;
+        if(orderDetail.length){
+            const orderBy = CONSTANTS.restro.tableList.filter(item => {
+                if(item.id === orderDetail[0].orderBy){
+                    return item;
+                }
+            });
+            return orderBy;
+        } else {
+            return [];
+        }
+        
+    }
     getOrder(orderId){
         let orderDetail = this.props.restro.orderDetail;
         let ind = orderDetail.findIndex((v) => v.id === parseInt(orderId, Number));
@@ -156,7 +170,9 @@ class OrderStatusContainer extends React.Component {
                     <div className='body-padding-top'>
                         <div className="row">
                             <div className='col-md-6'>
-                                <OrderReviewList isReadOnly='true' orderList={this.props.restro.orderList}/>
+                                <OrderReviewList isReadOnly='true' orderList={this.props.restro.orderList}
+                                    tableList ={this.getOrderBy()}
+                                />
                             </div>
                             <div className='col-md-6'>
                                 <OrderStatus

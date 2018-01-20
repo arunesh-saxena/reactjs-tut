@@ -46,7 +46,8 @@ export const NavMenu = (props) => {
                                 <NavLink className="nav-link" activeClassName='active' to={"/socket/"}>Socket</NavLink>
                             </li>
                             <li className="nav-item">
-                            <NavLink className="nav-link" exact activeClassName="active" to='/restro/'>Restro</NavLink>
+                            {/* <NavLink className="nav-link" activeClassName="active" to='/restro/'>Restro</NavLink> */}
+                            <a className="nav-link" activeClassName="active" href='/restro/'>Restro</a>
                             </li>
 
                     </ul>

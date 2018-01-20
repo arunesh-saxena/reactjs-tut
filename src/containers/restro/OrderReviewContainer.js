@@ -18,7 +18,8 @@ class OrderReviewContainer extends Component {
     componentWillMount(){
         this.resetOrder();
     }
-    tableNum = 2;
+    orderByElm = null;
+    tableNum = null;
 
     resetOrder(){
         this.props.setOrder({}, 'RESET');
@@ -45,8 +46,13 @@ class OrderReviewContainer extends Component {
             delete temp.name;
             items.push(temp);
         }); */
+        if(!this.tableNum){
+           this.orderByElm.className += ' error';
+        } else {
+            this.orderByElm.className = this.orderByElm.className.replace('error','');
+        }
         let orderData = {
-            orderBy: this.tableNum,
+            orderBy: this.tableNum, 
             items: orderItems
         };            
 
@@ -59,7 +65,6 @@ class OrderReviewContainer extends Component {
             body: JSON.stringify(orderData)
         }).then((res)=>res.json())
 		.then((res) => {
-            console.log(res)
             if(res.success){
                 this.props.history.push(`/restro/order/status/${res.data.id}`);
             }
@@ -68,11 +73,16 @@ class OrderReviewContainer extends Component {
             console.error(error);
 		});
     }
-
+    onTableChange (tableId) {
+        this.tableNum = tableId;
+    }
     render() {
         return (
             <div>
-                 <OrderReviewList onContinue={()=>{this.onContinueClick()}} orderList={this.props.restro.orderList} onIncrement={this.onIncrementClick} onDecrement={this.onDecrementClick}/>
+                 <OrderReviewList onContinue={()=>{this.onContinueClick()}} orderList={this.props.restro.orderList} onIncrement={this.onIncrementClick} onDecrement={this.onDecrementClick}
+                 tableList={CONSTANTS.restro.tableList}
+                 orderByRef = {el => this.orderByElm = el}
+                 onTableSelect ={(tableId)=>this.onTableChange(tableId)}/>
             </div>
            
         );

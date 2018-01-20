@@ -31,7 +31,6 @@ const userReducer = (state = initialState, action) => {
             }
             break;
         case "SET_USER_STATUS":
-        console.log(action)
             state = {
                 ...state,
                 userData: {

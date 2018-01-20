@@ -58,6 +58,12 @@ export const CONSTANTS = {
             4: 'Completed',
             'DELIVERED': 5,
             5: 'Delivered'
-        }
+        },
+        tableList: [
+            {id:1,txt:'Table 1'}, 
+            {id:2,txt:'Table 2'},
+            {id:3,txt:'Table 3'},
+            {id:4,txt:'Table 4'},
+            {id:5,txt:'Table 5'}]
     }
 }
