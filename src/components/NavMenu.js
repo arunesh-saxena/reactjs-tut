@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const NavMenu = (props) => {
     return (
@@ -12,43 +12,44 @@ export const NavMenu = (props) => {
                     data-target="#navbarNav"
                     aria-controls="navbarNav"
                     aria-expanded="false"
-                    aria-label="Toggle navigation">
+                    aria-label="Toggle navigation"
+                    onClick={props.toggleNav}>
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <a className="navbar-brand" href="">Navbar</a>
-                <div className="collapse navbar-collapse" id="navbarNav">
+                <div className={`collapse navbar-collapse ${props.showNav ? 'show' : ''}`} id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <NavLink className="nav-link" exact activeClassName="active" to="/">Home</NavLink>
+                            <NavLink className="nav-link" exact to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" activeClassName='active' to={"/users/"}>Users</NavLink>
+                            <NavLink className="nav-link" to={"/users/"}>Users</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" activeClassName='active' to={"/protected/"}>Protected</NavLink>
+                            <NavLink className="nav-link" to={"/protected/"}>Protected</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" activeClassName='active' to={"/form/"}>Form</NavLink>
+                            <NavLink className="nav-link" to={"/form/"}>Form</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" activeClassName='active' to={"/toastex/"}>Toast Ex</NavLink>
+                            <NavLink className="nav-link" to={"/toastex/"}>Toast Ex</NavLink>
                         </li>
 
                         {props.isLoggedIn
                             ? <li className="nav-item">
-                                    <NavLink className="nav-link" activeClassName='active' to={"/logout/"}>LogOut</NavLink>
-                                </li>
+                                <NavLink className="nav-link" to={"/logout/"}>LogOut</NavLink>
+                            </li>
                             : <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName='active' to={"/login/"}>Login</NavLink>
+                                <NavLink className="nav-link" to={"/login/"}>Login</NavLink>
                             </li>}
 
-                            <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName='active' to={"/socket/"}>Socket</NavLink>
-                            </li>
-                            <li className="nav-item">
-                            {/* <NavLink className="nav-link" activeClassName="active" to='/restro/'>Restro</NavLink> */}
-                            <a className="nav-link" activeClassName="active" href='/restro/'>Restro</a>
-                            </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to={"/socket/"}>Socket</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            {/* <NavLink className="nav-link"  to='/restro/'>Restro</NavLink> */}
+                            <a className="nav-link" href='/restro/'>Restro</a>
+                        </li>
 
                     </ul>
                 </div>
